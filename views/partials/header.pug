@@ -1,0 +1,18 @@
+header.header
+    .header__column
+        a(href=routes.home)
+            .header__logo
+                i.fab.fa-youtube
+            .header__site-name
+                |WeTube
+    .header__column
+        form.search-form(action=routes.search, method="get")
+            //- TODO: represents search_query in input placeholder
+            input(type="text", name="search_query", placeholder="Search")
+            button
+                i.fas.fa-search
+    .header__column
+        a(href=routes.serviceLogin)
+            button
+                i.fas.fa-user-circle
+                span SIGN IN
