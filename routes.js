@@ -11,7 +11,8 @@ const EDIT_PROFILE = "/user/:id/edit-profile";
 const CAHNGE_PASSWORD = "/user/:id/change-password";
 
 // Video routes
-const VIDEO_DETAIL = "/video/:id";
+const VIDEO_DETAIL = "/video/:id/edit";
+const WATCH_VIDEO = "/video/watch/:id";
 const UPLOAD_VIDEO = "/video/upload";
 const EDIT_VIDEO = "/video/:id/edit-video";
 const DELETE_VIDEO = "/video/:id/delete-video";
@@ -22,13 +23,56 @@ const routes = {
   signup: SIGNUP,
   serviceLogin: SERVICE_LOGIN,
   logout: LOGOUT,
-  userDetail: USER_DETAIL,
-  editProfile: EDIT_PROFILE,
-  changePassword: CAHNGE_PASSWORD,
-  videoDetail: VIDEO_DETAIL,
+  userDetail: (id) => {
+    if (id) {
+      return `/user/${id}`;
+    } else {
+      return USER_DETAIL;
+    }
+  },
+  editProfile: (id) => {
+    if (id) {
+      return `/user/${id}/edit-profile`;
+    } else {
+      return EDIT_PROFILE;
+    }
+  },
+  changePassword: (id) => {
+    if (id) {
+      return `/user/${id}/change-password`;
+    } else {
+      return CAHNGE_PASSWORD;
+    }
+  },
+  videoDetail: (id) => {
+    if (id) {
+      return `/video/${id}/edit`;
+    } else {
+      return VIDEO_DETAIL;
+    }
+  },
+  watchVideo: (id) => {
+    if (id) {
+      return `/video/watch/${id}`;
+    } else {
+      return WATCH_VIDEO;
+    }
+  },
   uploadVideo: UPLOAD_VIDEO,
-  editVideo: EDIT_VIDEO,
-  deleteVideo: DELETE_VIDEO,
+  editVideo: (id) => {
+    if (id) {
+      return `/video/${id}/edit-video`;
+    } else {
+      return EDIT_VIDEO;
+    }
+  },
+  deleteVideo: (id) => {
+    if (id) {
+      return `/video/${id}/delete-video`;
+    } else {
+      return DELETE_VIDEO;
+    }
+  },
 };
 
 export default routes;

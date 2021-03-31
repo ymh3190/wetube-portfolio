@@ -1,0 +1,15 @@
+mixin videoBlock(video={})
+    .videoBlock
+        .videoBlock__column
+            a.thumbnail(href=routes.videoDetail(video.id))
+                video(src=video.videoFile)
+        .videoBlock__column
+            //- a.avatar-link(href=routes.userDetail(video.creator.id))
+                //- img(src=video.creator.avatarUrl, alt="")
+            a.video-title-link(href=routes.videoDetail(video.id)) 
+                h4=video.title
+                .metadata-line
+                    span=video.views
+                    //- compute between current time and created time
+                    span=video.createdAt
+                    //- span=video.creator.name

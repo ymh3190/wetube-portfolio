@@ -1,3 +1,37 @@
 extends layouts/main
 
 block content
+    .content-container
+        .content-left
+            .content-left__thumbnail
+                a.overlay-link-to-wetube(href=routes.watchVideo(video.id)) 
+                    video(src=`/${video.fileUrl}`)
+                span Your video
+                span=video.title
+            ul.content-left__menu
+                li
+                    a(href=routes.videoDetail(video.id))
+                        i.fas.fa-pen
+                        span Details
+                li 
+                    //- add comments in routes.js
+                    a(href="")
+                        i.fas.fa-comment-alt
+                        span Comments
+        .content-main
+            header.content-main__header
+                h1 Video details
+                button SAVE
+            .content-main__edit
+                form.main-edit__form-container(action=routes.videoDetail(video.id), method="post")
+                    .form-container__title
+                        .input-title
+                            span Title
+                            span (required)
+                        div
+                            input(type="text", name="title", placeholder="Title")
+                    .form-container__descrption
+                        .input-description
+                            span Description
+                        div
+                            input(type="text", name="description", placeholder="Description")
