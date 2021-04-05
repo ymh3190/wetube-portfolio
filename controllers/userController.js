@@ -1,11 +1,21 @@
-export const signup = (req, res) => {
+export const getSignup = (req, res) => {
   // Render signup.pug
-  res.render("signup");
+  res.render("signup", { pageTitle: "Sign Up" });
 };
 
-export const serviceLogin = (req, res) => {
+export const postSignup = (req, res) => {
+  // Render signup.pug
+  res.render("signup", { pageTitle: "Sign Up" });
+};
+
+export const getSignin = (req, res) => {
   // Render serviceLogin.pug
-  res.render("serviceLogin");
+  res.render("signin", { pageTitle: "Sign In" });
+};
+
+export const postSignin = (req, res) => {
+  // Render serviceLogin.pug
+  res.render("signin", { pageTitle: "Sign In" });
 };
 
 export const logout = (req, res) => {

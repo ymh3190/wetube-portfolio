@@ -1,0 +1,61 @@
+.header {
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  .header-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 15px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+  .wetube-renderer {
+    display: flex;
+    align-items: center;
+    color: black;
+    width: min-content;
+    .wetube-logo {
+      margin-right: 5px;
+      font-size: 26px;
+      color: red;
+    }
+    .wetube-path {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+  .header-column:nth-child(2) {
+    display: grid;
+  }
+  .header-column:last-child {
+    display: flex;
+    justify-self: end;
+  }
+  .search-form {
+    display: flex;
+    input {
+      width: 85%;
+      padding: 5px 10px;
+    }
+    input:focus {
+      outline: 1px solid rgba(0, 0, 255, 0.2);
+    }
+    button {
+      width: 10%;
+    }
+  }
+  .service-login button {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid blue;
+    color: blue;
+    i {
+      font-size: 25px;
+      margin-right: 10px;
+    }
+    span {
+      font-size: 15px;
+    }
+  }
+}

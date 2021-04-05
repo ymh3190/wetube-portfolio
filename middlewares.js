@@ -24,11 +24,12 @@ export const localsMiddleware = (req, res, next) => {
 //   }
 // };
 
-export const getVideoById = (id) => {
+export const tryCatchVideo = (id) => {
+  let video = [];
   try {
-    const video = Video.findById(id);
-    return video;
+    video = Video.findById(id);
   } catch (error) {
     console.log(error);
   }
+  return video;
 };

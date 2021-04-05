@@ -1,12 +1,12 @@
-mixin videoBlock(video={})
-    .videoBlock
-        .videoBlock__column
-            a.thumbnail(href=routes.videoDetail(video.id))
+mixin videoContent(video={})
+    .videoContent
+        .videoContent__column
+            a.thumbnail(href=routes.watchVideo(video.id))
                 video(src=video.videoFile)
-        .videoBlock__column
+        .videoContent__column
             //- a.avatar-link(href=routes.userDetail(video.creator.id))
                 //- img(src=video.creator.avatarUrl, alt="")
-            a.video-title-link(href=routes.videoDetail(video.id)) 
+            a.video-title-link(href=routes.watchVideo(video.id)) 
                 h4=video.title
                 .metadata-line
                     span=video.views

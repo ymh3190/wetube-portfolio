@@ -2,7 +2,7 @@
 const HOME = "/";
 const SEARCH = "/search";
 const SIGNUP = "/signup";
-const SERVICE_LOGIN = "/service-login";
+const SIGNIN = "/signin";
 const LOGOUT = "/logout";
 
 // User routes
@@ -11,7 +11,7 @@ const EDIT_PROFILE = "/user/:id/edit-profile";
 const CAHNGE_PASSWORD = "/user/:id/change-password";
 
 // Video routes
-const VIDEO_DETAIL = "/video/:id/edit";
+const VIDEO_DETAIL = "/video/:id/detail";
 const WATCH_VIDEO = "/video/watch/:id";
 const UPLOAD_VIDEO = "/video/upload";
 const EDIT_VIDEO = "/video/:id/edit-video";
@@ -21,7 +21,7 @@ const routes = {
   home: HOME,
   search: SEARCH,
   signup: SIGNUP,
-  serviceLogin: SERVICE_LOGIN,
+  signin: SIGNIN,
   logout: LOGOUT,
   userDetail: (id) => {
     if (id) {
@@ -46,7 +46,7 @@ const routes = {
   },
   videoDetail: (id) => {
     if (id) {
-      return `/video/${id}/edit`;
+      return `/video/${id}/detail`;
     } else {
       return VIDEO_DETAIL;
     }

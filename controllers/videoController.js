@@ -1,6 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
-import { getVideoById } from "../middlewares";
+import { tryCatchVideo } from "../middlewares";
 
 export const home = async (req, res) => {
   // Render home.pug
@@ -13,12 +13,22 @@ export const home = async (req, res) => {
   res.render("home", { pageTitle: "Home", videos });
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   // Render search.pug
   const {
-    query: { search_query },
+    query: { word },
   } = req;
-  res.render("search", { search_query });
+  let videos = [];
+  try {
+    if (word) {
+      videos = await Video.find({ title: { $regex: word, $options: "i" } });
+      res.render("search", { pageTitle: "Search", word, videos });
+    } else {
+      res.redirect(routes.home);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const videoDetail = async (req, res) => {
@@ -26,7 +36,7 @@ export const videoDetail = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const video = await getVideoById(id);
+  const video = await tryCatchVideo(id);
   res.render("videoDetail", { pageTitle: "Video detail", video });
 };
 
@@ -35,7 +45,7 @@ export const watchVideo = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const video = await getVideoById(id);
+  const video = await tryCatchVideo(id);
   res.render("watchVideo", { pageTitle: "Watch video", video });
 };
 
@@ -66,7 +76,7 @@ export const editVideo = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const video = await getVideoById(id);
+  const video = await tryCatchVideo(id);
   res.render("editVideo", { pageTitle: "editVideo", video });
 };
 

@@ -1,0 +1,19 @@
+mixin videoSearching(video={})
+    .videoSearching
+        .videoSearching__column
+            a.thumbnail(href=routes.watchVideo(video.id))
+                video(src=video.videoFile)
+        .videoSearching__column
+            .videoSearching__info
+                h3=video.title
+                    a.video-title-link(href=routes.watchVideo(video.id)) 
+            .metadata-block
+                span=video.views
+                //- compute between current time and created time
+                span=video.createdAt
+            .user-info
+                //- span=video.creator.name
+                //- a.avatar-link(href=routes.userDetail(video.creator.id))
+                    //- img(src=video.creator.avatarUrl, alt="")\
+            .description-text
+                //- implements string split: " "

@@ -1,0 +1,21 @@
+extends layouts/sign
+
+block content
+    .login-container
+        .site-name WeTube
+        div
+            div
+                h1 Sign in
+                div to continue to WeTube
+            div
+                div
+                    form(action=routes.signin, method="post")
+                        input(type="email", name="email", placeholder="Email")
+                        input(type="password", name="password", placeholder="Password")
+                        input(type="submit", value="Sign In")
+                div
+                    div
+                        a(href=routes.signup) Create account
+                    div
+                    
+    

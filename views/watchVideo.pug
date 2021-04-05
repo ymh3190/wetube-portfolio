@@ -1,3 +1,22 @@
 extends layouts/main
 
 block content
+    .watchVideo-container
+        .watchVideo-video
+            //- VideoFile
+            video(src=`/${video.fileUrl}`) 
+        .watchVideo-info
+            h1.video-title=video.title
+            .video-views-createdAt
+            .video-menu-container
+        .watchVideo-description
+            div
+                div
+                    //- Avatar
+                    a(href="")
+                    //- UserName
+                    div
+            div
+                div
+                div
+                    span=video.description
