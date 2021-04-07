@@ -10,9 +10,17 @@ block content
             div
                 div
                     form(action=routes.signin, method="post")
-                        input(type="email", name="email", placeholder="Email")
-                        input(type="password", name="password", placeholder="Password")
+                        input(type="email", name="email", placeholder="Email", required=true)
+                        input(type="password", name="password", placeholder="Password", required=true)
                         input(type="submit", value="Sign In")
+                    button
+                        a(href=routes.gitHub)
+                            i.fab.fa-github
+                            span Github
+                    button
+                        a(href=routes.faceBook)
+                            i.fab.fa-facebook
+                            span Facebook
                 div
                     div
                         a(href=routes.signup) Create account

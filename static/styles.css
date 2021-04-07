@@ -134,6 +134,26 @@ table {
   border-spacing: 0;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button:focus {
+  outline: none;
+}
+
+img {
+  width: 100%;
+  max-width: 30px;
+  max-height: 30px;
+  height: 100%;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
 .header {
   margin-bottom: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
@@ -226,16 +246,4 @@ table {
 }
 .header .service-login button span {
   font-size: 15px;
-}
-
-body {
-  font-family: "Open Sans", sans-serif;
-}
-
-a {
-  text-decoration: none;
-}
-
-button:focus {
-  outline: none;
 }

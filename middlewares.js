@@ -8,21 +8,9 @@ export const uploadVideo = multerVideo.single("videoFile");
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
+  res.locals.user = req.user;
   next();
 };
-
-// implements try-catch
-// export const getVideo = async (req, res) => {
-//   const {
-//     params: { id },
-//   } = req;
-//   try {
-//     const video = await Video.findById(id);
-//     return video;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const tryCatchVideo = (id) => {
   let video = [];
@@ -32,4 +20,20 @@ export const tryCatchVideo = (id) => {
     console.log(error);
   }
   return video;
+};
+
+export const onlyPrivate = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
+};
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
 };

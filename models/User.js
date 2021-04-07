@@ -1,25 +1,16 @@
 import mongoose from "mongoose";
+import passportLocalMongoose from "passport-local-mongoose";
 
 const UserSchema = new mongoose.Schema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: String,
   avatarUrl: String,
   githubId: Number,
+  facebookId: Number,
 });
+
+UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 
 const model = mongoose.model("User", UserSchema);
 export default model;
-
-// async function run() {
-//   const UserSchema = new mongoose.Schema({
-//     name: String,
-//     email: String,
-//     avatarUrl: String,
-//     githubId: Number,
-//   });
-
-//   const User = mongoose.model("User", UserSchema, "User");
-//   User.watch().on("change", (data) => console.log(new Date(), data));
-
-//   console.log(new Date(), "Inserting doc");
-// }

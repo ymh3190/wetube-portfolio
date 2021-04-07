@@ -13,9 +13,19 @@ header.header
                 button
                     i.fas.fa-search
         .header-column
-            a.service-login(href=routes.signin)
+            if user
+                //- TODO: styling css
                 button
-                    i.fas.fa-user-circle
-                    span SIGN IN
+                    a(href=routes.uploadVideo) Upload
+                button
+                    a(href=routes.logout) Log Out
+                button
+                    a(href=routes.userDetail(user.id))
+                        img(src=user.avatarUrl)
+            else
+                a.service-login(href=routes.signin)
+                    button
+                        i.fas.fa-user-circle
+                        span SIGN IN
             //- TODO: represents videoDetail() if user logged
             
