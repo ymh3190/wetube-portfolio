@@ -81,10 +81,10 @@ const routes = {
       return DELETE_VIDEO;
     }
   },
-  gitHub: GITHUB,
-  gitHubCallback: GITHUB_CALLBACK,
-  faceBook: FACEBOOK,
-  faceBookCallback: FACEBOOK_CALLBACK,
+  github: GITHUB,
+  githubCallback: GITHUB_CALLBACK,
+  facebook: FACEBOOK,
+  facebookCallback: FACEBOOK_CALLBACK,
 };
 
 export default routes;

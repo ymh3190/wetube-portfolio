@@ -2,14 +2,21 @@ mixin videoContent(video={})
     .videoContent
         .videoContent__column
             a.thumbnail(href=routes.watchVideo(video.id))
-                video(src=video.videoFile)
+                video(src=`/${video.videoFile}`, controls=true)
         .videoContent__column
-            //- a.avatar-link(href=routes.userDetail(video.creator.id))
-                //- img(src=video.creator.avatarUrl, alt="")
+            //- TODO: styling
+            if video.creator
+                a.avatar-link(href=routes.userDetail(video.creator.id))
+                    img.avatar-img(src=video.creator.avatarUrl)
             a.video-title-link(href=routes.watchVideo(video.id)) 
                 h4=video.title
-                .metadata-line
-                    span=video.views
-                    //- compute between current time and created time
-                    span=video.createdAt
-                    //- span=video.creator.name
+                .video-info
+                    if video.views === 1
+                        span #{video.views} view 
+                    else
+                        span #{video.views} views
+                    //- TODO: move to controller
+                    span.diff-time=Math.floor((Date.now() - Date.parse(video.createdAt))/1000)
+                    if video.creator
+                        a(href=routes.userDetail(video.creator.id))
+                            span #{video.creator.firstName} #{video.creator.lastName}

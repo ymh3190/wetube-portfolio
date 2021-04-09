@@ -9,7 +9,7 @@ import routes from "../routes";
 
 const userRouter = express.Router();
 
-userRouter.get(routes.userDetail(), onlyPrivate, userDetail);
+userRouter.get(routes.userDetail(), userDetail);
 userRouter.get(routes.editProfile(), onlyPrivate, editProfile);
 userRouter.get(routes.changePassword(), onlyPrivate, changePassword);
 

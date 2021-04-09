@@ -4,8 +4,8 @@ import FaceBookStrategy from "passport-facebook";
 import routes from "./routes";
 import User from "./models/User";
 import {
-  faceBookSigninCallback,
-  gitHubSigninCallback,
+  facebookSigninCallback,
+  githubSigninCallback,
 } from "./controllers/userController";
 
 passport.use(User.createStrategy());
@@ -15,9 +15,9 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:${process.env.PORT}${routes.gitHubCallback}`,
+      callbackURL: `http://localhost:${process.env.PORT}${routes.githubCallback}`,
     },
-    gitHubSigninCallback
+    githubSigninCallback
   )
 );
 
@@ -26,10 +26,11 @@ passport.use(
     {
       clientID: process.env.FB_ID,
       clientSecret: process.env.FB_SECRET,
-      callbackURL: `http://localhost:${process.env.PORT}${routes.faceBookCallback}`,
-      profileFields: ["id", "emails", "name", "picture"],
+      callbackURL: `http://localhost:${process.env.PORT}${routes.facebookCallback}`,
+      profileFields: ["id", "email", "name", "picture"],
+      scope: ["public_profile", "email"],
     },
-    faceBookSigninCallback
+    facebookSigninCallback
   )
 );
 

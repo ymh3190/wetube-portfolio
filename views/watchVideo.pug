@@ -3,20 +3,75 @@ extends layouts/main
 block content
     .watchVideo-container
         .watchVideo-video
-            //- VideoFile
             video(src=`/${video.fileUrl}`) 
-        .watchVideo-info
+        .watchVideo-watch-info
             h1.video-title=video.title
-            .video-views-createdAt
-            .video-menu-container
+            div
+                .video-info
+                    if video.views === 1
+                        span #{video.views} view 
+                    else
+                        span #{video.views} views
+                    //- TODO: Move to ajax
+                    if video.createdAt.getMonth() === 0
+                        span Jan #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 1
+                        span Feb #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 2
+                        span Mar #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 3
+                        span Apr #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 4
+                        span May #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 5
+                        span June #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 6
+                        span July #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 7
+                        span Aug #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 8
+                        span Sep #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 9
+                        span Oct #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 10
+                        span Nov #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                    else if video.createdAt.getMonth() === 11
+                        span Dec #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
+                .video-menu-container
+                //- Like, unlike
+
         .watchVideo-description
             div
                 div
-                    //- Avatar
-                    a(href="")
-                    //- UserName
+                    a(href=routes.userDetail(video.creator.id))
+                        img.user-avatar-img(src=video.creator.avatarUrl)
+                div
                     div
+                        a(href=routes.userDetail(video.creator.id))
+                            span #{video.creator.firstName} #{video.creator.lastName}
+                    div
+                        span=video.description
             div
                 div
+                    div
+                        if video.comments === 1
+                            span #{video.comments.length} comment
+                        else
+                            span #{video.comments.length} comments
                 div
-                    span=video.description
+                    //- Add comment
+                    div
+                        div
+                            img.avatar-img(src="")
+                        div
+                            form(action=routes.watchVideo(video.id), method="post")
+                                input(type="text", name="comment", placeholder="Add a public comment...")
+                                button COMMENT
+                    //- Implements showing us comments
+                    div
+                        each comment in video.comments
+                            div
+                                img.avatar-img(src="")
+                            div
+                                span=comment.id
+

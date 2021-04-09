@@ -8,24 +8,24 @@ header.header
                     |WeTube
         .header-column
             form.search-form(action=routes.search, method="get")
-                //- TODO: represents term in input placeholder
                 input(type="text", name="word", placeholder="Search")
                 button
                     i.fas.fa-search
         .header-column
-            if user
-                //- TODO: styling css
-                button
-                    a(href=routes.uploadVideo) Upload
-                button
-                    a(href=routes.logout) Log Out
-                button
-                    a(href=routes.userDetail(user.id))
-                        img(src=user.avatarUrl)
-            else
-                a.service-login(href=routes.signin)
-                    button
-                        i.fas.fa-user-circle
-                        span SIGN IN
-            //- TODO: represents videoDetail() if user logged
-            
+            ul.masthead
+                if loggedUser
+                    //- TODO: when Hover li, show you name of list
+                    li.masthead-upload
+                        a(href=routes.uploadVideo)
+                            i.fas.fa-upload
+                    li.masthead-logout
+                        a(href=routes.logout)
+                            i.fas.fa-sign-out-alt
+                    li.masthead-avatar
+                        a(href=routes.userDetail(loggedUser.id))
+                            img.user-avatar-img(src=loggedUser.avatarUrl)
+                else
+                    li.masthead-signin
+                        a(href=routes.signin)
+                            i.fas.fa-user-circle
+                            span SIGN IN

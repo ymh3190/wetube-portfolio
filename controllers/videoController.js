@@ -1,4 +1,5 @@
 import routes from "../routes";
+import User from "../models/User";
 import Video from "../models/Video";
 import { tryCatchVideo } from "../middlewares";
 
@@ -6,7 +7,7 @@ export const home = async (req, res) => {
   // Render home.pug
   let videos = [];
   try {
-    videos = await Video.find({});
+    videos = await Video.find({}).populate("creator");
   } catch (error) {
     console.log(error);
   }
@@ -45,8 +46,13 @@ export const watchVideo = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const video = await tryCatchVideo(id);
-  res.render("watchVideo", { pageTitle: "Watch video", video });
+  let video = [];
+  try {
+    video = await Video.findById(id).populate("creator").populate("comments");
+    res.render("watchVideo", { pageTitle: "Watch video", video });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getUploadVideo = (req, res) =>
@@ -58,13 +64,16 @@ export const postUploadVideo = async (req, res) => {
   const {
     body: { title, description },
     file: { path },
+    user: { id },
   } = req;
   try {
     const newVideo = await Video.create({
       fileUrl: path,
       title,
       description,
+      creator: id,
     });
+    await User.findOneAndUpdate({ id, videos: newVideo });
     res.redirect(routes.videoDetail(newVideo.id));
   } catch (error) {
     console.log(error);

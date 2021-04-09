@@ -1,6 +1,7 @@
 import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
+import Video from "../models/Video";
 
 export const getSignup = (req, res) => {
   // Render signup.pug
@@ -17,6 +18,7 @@ export const postSignup = async (req, res, next) => {
         firstName,
         lastName,
         email,
+        avatarUrl: "",
       });
       await User.register(user, password);
       next();
@@ -40,14 +42,14 @@ export const postSignin = passport.authenticate("local", {
   failureRedirect: routes.signin,
 });
 
-export const gitHubSignin =
+export const githubSignin =
   // step 1. Authenticate Github
   passport.authenticate("github");
-export const postGitHubSignin = (req, res) => {
+export const postGithubSignin = (req, res) => {
   //  step 2. If success authentication, redirect home
   res.redirect(routes.home);
 };
-export const gitHubSigninCallback = async (_, __, profile, cb) => {
+export const githubSigninCallback = async (_, __, profile, cb) => {
   /*
     step 3. Include information about github
     _: accessToken
@@ -59,14 +61,15 @@ export const gitHubSigninCallback = async (_, __, profile, cb) => {
   const {
     _json: { id, avatar_url: avatarUrl, email, name },
   } = profile;
+  const firstName = name.split(" ")[0];
+  const lastName = name.split(" ")[1];
   try {
     const user = await User.findOne({ email });
-    const firstName = name.split(" ")[0];
-    const lastName = name.split(" ")[1];
     if (user) {
       user.githubId = id;
       user.firstName = firstName;
       user.lastName = lastName;
+      user.avatarUrl = avatarUrl;
       user.save();
       return cb(null, user);
     } else {
@@ -84,15 +87,13 @@ export const gitHubSigninCallback = async (_, __, profile, cb) => {
   }
 };
 
-export const faceBookSignin = passport.authenticate("facebook", {
-  scope: ["email"],
-});
-export const postFaceBookSignin = (req, res) => {
+export const facebookSignin = passport.authenticate("facebook");
+export const postFacebookSignin = (req, res) => {
   res.redirect(routes.home);
 };
-export const faceBookSigninCallback = async (_, __, profile, cb) => {
+export const facebookSigninCallback = async (_, __, profile, cb) => {
   const {
-    _json: { id, email, first_name: firstName, last_name: lastName, picture },
+    _json: { id, email, last_name: lastName, first_name: firstName, picture },
   } = profile;
   try {
     const user = await User.findOne({ email });
@@ -100,6 +101,7 @@ export const faceBookSigninCallback = async (_, __, profile, cb) => {
       user.facebookId = id;
       user.firstName = firstName;
       user.lastName = lastName;
+      user.avatarUrl = picture.data.url;
       user.save();
       return cb(null, user);
     } else {
@@ -123,9 +125,14 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const userDetail = (req, res) => {
+export const userDetail = async (req, res) => {
   // Render userDetail.pug
-  res.render("userDetail", { pageTitle: "User Detail" });
+  const {
+    params: { id },
+  } = req;
+  const user = await User.findById(id).populate("videos");
+  const videos = await Video.find({ creator: user.id }).populate("creator");
+  res.render("userDetail", { pageTitle: "User Detail", videos });
 };
 
 export const editProfile = (req, res) => {

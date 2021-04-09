@@ -1,0 +1,18 @@
+.videoContent {
+  display: flex;
+  flex-direction: column;
+  .videoContent__column:first-child video {
+    width: 100%;
+    margin-bottom: 3%;
+  }
+  .videoContent__column:last-child {
+    margin-bottom: 10%;
+  }
+  .avatar-img {
+    border-radius: 50%;
+    width: 80%;
+    max-width: 40px;
+    height: 80%;
+    max-height: 40px;
+  }
+}

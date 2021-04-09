@@ -29,6 +29,7 @@
   .header-column:last-child {
     display: flex;
     justify-self: end;
+    align-items: center;
   }
   .search-form {
     display: flex;
@@ -43,7 +44,26 @@
       width: 10%;
     }
   }
-  .service-login button {
+  .masthead {
+    display: flex;
+    align-items: center;
+    & li:not(:last-child) {
+      margin-right: 20px;
+    }
+    i {
+      opacity: 0.6;
+    }
+  }
+  .masthead-avatar .user-avatar-img {
+    display: flex;
+    align-self: center;
+    border-radius: 50%;
+    width: 80%;
+    max-width: 40px;
+    height: 80%;
+    max-height: 40px;
+  }
+  .masthead-signin a {
     display: flex;
     align-items: center;
     padding: 5px 10px;

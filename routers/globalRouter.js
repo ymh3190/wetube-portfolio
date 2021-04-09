@@ -6,10 +6,10 @@ import {
   postSignin,
   getSignup,
   postSignup,
-  gitHubSignin,
-  postGitHubSignin,
-  faceBookSignin,
-  postFaceBookSignin,
+  facebookSignin,
+  postFacebookSignin,
+  githubSignin,
+  postGithubSignin,
 } from "../controllers/userController";
 import { home, search } from "../controllers/videoController";
 import { onlyPrivate, onlyPublic } from "../middlewares";
@@ -62,22 +62,22 @@ globalRouter.post(
 globalRouter.get(routes.signin, onlyPublic, getSignin);
 globalRouter.post(routes.signin, onlyPublic, postSignin);
 
-globalRouter.get(routes.gitHub, gitHubSignin);
+globalRouter.get(routes.github, githubSignin);
 globalRouter.get(
-  routes.gitHubCallback,
+  routes.githubCallback,
   passport.authenticate("github", {
     failureRedirect: routes.signin,
   }),
-  postGitHubSignin
+  postGithubSignin
 );
 
-globalRouter.get(routes.faceBook, faceBookSignin);
+globalRouter.get(routes.facebook, facebookSignin);
 globalRouter.get(
-  routes.faceBookCallback,
+  routes.facebookCallback,
   passport.authenticate("facebook", {
     failureRedirect: routes.signin,
   }),
-  postFaceBookSignin
+  postFacebookSignin
 );
 
 globalRouter.get(routes.logout, onlyPrivate, logout);
