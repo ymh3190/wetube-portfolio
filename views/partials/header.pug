@@ -13,7 +13,7 @@ header.header
                     i.fas.fa-search
         .header-column
             ul.masthead
-                if loggedUser
+                if user
                     //- TODO: when Hover li, show you name of list
                     li.masthead-upload
                         a(href=routes.uploadVideo)
@@ -22,8 +22,8 @@ header.header
                         a(href=routes.logout)
                             i.fas.fa-sign-out-alt
                     li.masthead-avatar
-                        a(href=routes.userDetail(loggedUser.id))
-                            img.user-avatar-img(src=loggedUser.avatarUrl)
+                        a(href=routes.userDetail(user.id))
+                            img.user-avatar-img(src=user.avatarUrl)
                 else
                     li.masthead-signin
                         a(href=routes.signin)

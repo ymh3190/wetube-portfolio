@@ -1,5 +1,46 @@
-.videos {
+.user-detail {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1%;
+  padding-top: 0.5%;
+  .user-profile {
+    width: 100%;
+    padding-right: 20px;
+  }
+  .user-videos:not(:first-child) {
+    width: 100%;
+  }
+  .avatar-container {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    position: relative;
+  }
+  .avatar-title {
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    left: 10px;
+    font-weight: 600;
+  }
+  .avatar-img {
+    display: flex;
+  }
+  .avatar-before img {
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .avatar-after {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .user-avatar {
+    display: flex;
+    justify-content: center;
+  }
+  .user-avatar input,
+  .user-avatar button {
+    font-size: 18px;
+  }
 }

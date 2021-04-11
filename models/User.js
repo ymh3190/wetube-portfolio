@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
   },
   githubId: Number,
   facebookId: Number,
+  instagramId: Number,
   videos: [
     {
       type: mongoose.Schema.Types.ObjectId,

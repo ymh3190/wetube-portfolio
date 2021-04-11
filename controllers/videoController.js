@@ -36,9 +36,19 @@ export const videoDetail = async (req, res) => {
   // Render videoDetail.pug
   const {
     params: { id },
+    user,
   } = req;
-  const video = await tryCatchVideo(id);
-  res.render("videoDetail", { pageTitle: "Video detail", video });
+  try {
+    const video = Video.findById(id);
+    if (user.id === toString(video.creator)) {
+      res.render("videoDetail", { pageTitle: "Video detail", video });
+    } else {
+      throw Error();
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
 };
 
 export const watchVideo = async (req, res) => {
@@ -46,12 +56,14 @@ export const watchVideo = async (req, res) => {
   const {
     params: { id },
   } = req;
-  let video = [];
   try {
-    video = await Video.findById(id).populate("creator").populate("comments");
+    const video = await Video.findById(id)
+      .populate("creator")
+      .populate("comments");
     res.render("watchVideo", { pageTitle: "Watch video", video });
   } catch (error) {
     console.log(error);
+    res.redirect(routes.home);
   }
 };
 
@@ -74,7 +86,7 @@ export const postUploadVideo = async (req, res) => {
       creator: id,
     });
     await User.findOneAndUpdate({ id, videos: newVideo });
-    res.redirect(routes.videoDetail(newVideo.id));
+    res.redirect(routes.userDetail(id));
   } catch (error) {
     console.log(error);
   }
@@ -94,8 +106,15 @@ export const deleteVideo = async (req, res) => {
   // TODO: implements deleting video
   const {
     params: { id },
+    user,
   } = req;
-  await Video.findOneAndRemove({ _id: id });
-  await Video.save();
-  res.redirect(routes.videoDetail(id));
+  try {
+    const video = Video.findById(id);
+    if (user.id === toString(video.creator)) {
+      await Video.findOneAndRemove({ id });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  res.redirect(routes.home);
 };

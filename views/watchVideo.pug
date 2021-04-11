@@ -3,7 +3,7 @@ extends layouts/main
 block content
     .watchVideo-container
         .watchVideo-video
-            video(src=`/${video.fileUrl}`) 
+            video(src=`/${video.fileUrl}`, controls=true) 
         .watchVideo-watch-info
             h1.video-title=video.title
             div

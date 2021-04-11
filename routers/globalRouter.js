@@ -10,6 +10,8 @@ import {
   postFacebookSignin,
   githubSignin,
   postGithubSignin,
+  postInstagramSignin,
+  instagramSignin,
 } from "../controllers/userController";
 import { home, search } from "../controllers/videoController";
 import { onlyPrivate, onlyPublic } from "../middlewares";
@@ -78,6 +80,15 @@ globalRouter.get(
     failureRedirect: routes.signin,
   }),
   postFacebookSignin
+);
+
+globalRouter.get(routes.instagram, instagramSignin);
+globalRouter.get(
+  routes.instagramCallback,
+  passport.authenticate("instagram", {
+    failureRedirect: routes.signin,
+  }),
+  postInstagramSignin
 );
 
 globalRouter.get(routes.logout, onlyPrivate, logout);

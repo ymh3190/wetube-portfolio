@@ -1,3 +1,8 @@
 .watchVideo-container {
   padding: 5px 10px;
+  .watchVideo-video {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+  }
 }

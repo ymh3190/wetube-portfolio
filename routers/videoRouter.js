@@ -7,7 +7,7 @@ import {
   videoDetail,
   watchVideo,
 } from "../controllers/videoController";
-import { onlyPrivate, onlyPublic, uploadVideo } from "../middlewares";
+import { onlyPrivate, uploadVideo } from "../middlewares";
 import routes from "../routes";
 
 const videoRouter = express.Router();

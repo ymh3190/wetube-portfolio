@@ -119,6 +119,38 @@ export const facebookSigninCallback = async (_, __, profile, cb) => {
   }
 };
 
+export const instagramSignin = passport.authenticate("instagram");
+export const postInstagramSignin = (req, res) => {
+  res.redirect(routes.home);
+};
+export const instagramSigninCallback = async (_, __, profile, cb) => {
+  const {
+    _json: { id, email, last_name: lastName, first_name: firstName, picture },
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.instagramId = id;
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.avatarUrl = picture.data.url;
+      user.save();
+      return cb(null, user);
+    } else {
+      const newUser = await User.create({
+        instagramId: id,
+        email,
+        firstName,
+        lastName,
+        avatarUrl: picture.data.url,
+      });
+      return cb(null, newUser);
+    }
+  } catch (error) {
+    return cb(error);
+  }
+};
+
 export const logout = (req, res) => {
   // Log out and then redirect home
   req.logout();
@@ -130,8 +162,7 @@ export const userDetail = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const user = await User.findById(id).populate("videos");
-  const videos = await Video.find({ creator: user.id }).populate("creator");
+  const videos = await Video.find({ creator: id }).populate("creator");
   res.render("userDetail", { pageTitle: "User Detail", videos });
 };
 

@@ -1,0 +1,28 @@
+mixin userVideo(video={})
+    .userVideo
+        .user-video
+            .video-thumbnail
+                a.wetube-link(href=routes.watchVideo(video.id)) 
+                    video(src=`/${video.videoFile}`)
+        //- Implements by using AJAX+API
+        .user-video-info
+            if user == videos[0].creator
+                form.video-edit-title-form(action=routes.userDetail(video.id), method="post")
+                    .input-title
+                        span Title
+                    input(type="text", name="title", placeholder="Title", value=video.title)
+                    //- button Update Title
+                form.video-edit-description-form(action=routes.userDetail(video.id), method="post")
+                    .input-description
+                        span Description
+                    input(type="text", name="description", placeholder="Description")
+                    //- button Update Description
+                                    
+    //- .userVideo
+    //-     .userVideo__column
+    //-         a.thumbnail(href=routes.watchVideo(video.id))
+    //-             video(src=`/${video.videoFile}`)
+    //-     .userVideo__column
+    //-         a.video-title-link(href=routes.watchVideo(video.id)) 
+    //-             h4=video.title
+    //-             .video-info

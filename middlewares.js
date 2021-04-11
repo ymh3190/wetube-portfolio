@@ -5,10 +5,13 @@ import Video from "./models/Video";
 const multerVideo = multer({ dest: "uploads/videos/" });
 export const uploadVideo = multerVideo.single("videoFile");
 
+const multerAvatar = multer({ dest: "uploads/avatars/" });
+export const uploadAvatar = multerAvatar.single("avatarFile");
+
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "WeTube";
   res.locals.routes = routes;
-  res.locals.loggedUser = req.user;
+  res.locals.user = req.user;
   next();
 };
 
