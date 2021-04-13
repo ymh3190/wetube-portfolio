@@ -1,0 +1,21 @@
+mixin videoPlayer(video={})
+    .videoPlayer#jsVideoPlayer
+        video(src=`/${video.fileUrl}`)
+        .videoPlayer-controllers#jsVideoPlayerControllers
+            .videoPlayer-controllers-left
+                .videoPlayer-resume
+                    span#jsPlay
+                        i.fas.fa-play
+                .videoPlayer-volume
+                    span#jsVolume
+                        i.fas.fa-volume-up
+                    span#jsVolumeRange
+                .videoPlayer-time
+                    span#jsCurrentTime 00:00:00
+                    span /
+                    span#jsTotalTime 00:00:00
+            .videoPlayer-controllers-right
+                .videoPlayer-screen
+                    span#jsScreen
+                        i.fas.fa-expand
+            

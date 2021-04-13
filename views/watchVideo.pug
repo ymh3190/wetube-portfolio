@@ -1,9 +1,12 @@
 extends layouts/main
+include mixins/videoPlayer
 
 block content
     .watchVideo-container
         .watchVideo-video
-            video(src=`/${video.fileUrl}`, controls=true) 
+            +videoPlayer({
+                fileUrl:video.fileUrl
+            })
         .watchVideo-watch-info
             h1.video-title=video.title
             div

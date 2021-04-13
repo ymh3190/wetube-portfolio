@@ -3,10 +3,12 @@
 @import "config/reset.scss";
 @import "main.scss";
 
+@import "partials/header.scss";
+
+@import "mixins/userVideo.scss";
+@import "mixins/videoContent.scss";
+@import "mixins/videoPlayer.scss";
+
 @import "pages/hoem.scss";
 @import "pages/watchVideo.scss";
 @import "pages/userDetail.scss";
-
-@import "partials/header.scss";
-@import "partials/videoContent.scss";
-@import "partials/userVideo.scss";
