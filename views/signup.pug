@@ -1,27 +1,33 @@
 extends layouts/sign
 
 block content
-    .login-container
-        .site-name WeTube
-        div
-            div
+    .signup-container
+        .signup-column
+            span#w W
+            span#e e
+            span#t T
+            span#u u
+            span#b b
+            span#e e
+        .signup-column
+            .signup-title
                 h1 Sign in
                 div to continue to WeTube
-            div
+            .signup-form-container
                 div
-                    form(action=routes.signup, method="post")
+                    form.signup-form(action=routes.signup, method="post")
                         input(type="text", name="firstName", placeholder="First Name", required=true)
                         input(type="text", name="lastName", placeholder="Last Name", required=true)
                         input(type="email", name="email", placeholder="Email", required=true)
                         input(type="password", name="password", placeholder="Password", required=true)
                         input(type="password", name="confirmPassword", placeholder="Confirm Password", required=true)
                         input(type="submit", value="Sign Up")
-                    button
-                        a(href=routes.github)
+                    a(href=routes.github)
+                        button#github
                             i.fab.fa-github
                             span Github
-                    button
-                        a(href=routes.facebook) 
+                    a(href=routes.facebook) 
+                        button#facebook
                             i.fab.fa-facebook
                             span Facebook
                     //- button

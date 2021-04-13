@@ -1,0 +1,77 @@
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-top: 7%;
+  padding-top: 3%;
+  margin-left: 35%;
+  margin-right: 35%;
+  border-radius: 3%;
+  .signin-column:first-child {
+    margin-bottom: 5%;
+    font-weight: 600;
+    #w {
+      color: blue;
+    }
+    #e {
+      color: red;
+    }
+    #t {
+      color: blue;
+    }
+    #u {
+      color: orange;
+    }
+    #b {
+      color: green;
+    }
+    #e {
+      color: red;
+    }
+  }
+  .signin-column:last-child {
+    width: 70%;
+  }
+  .signin-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10%;
+    h1 {
+      font-weight: 600;
+      margin-bottom: 10%;
+      font-size: 20px;
+    }
+  }
+  .signin-form-container {
+    display: flex;
+    flex-direction: column;
+    & > div {
+      margin-bottom: 5%;
+      button {
+        width: 100%;
+        padding: 5% 0px;
+        margin-bottom: 5%;
+      }
+    }
+  }
+  #github,
+  #facebook {
+    font-size: 14px;
+    i {
+      margin-right: 2%;
+    }
+  }
+  .signin-form {
+    display: flex;
+    flex-direction: column;
+    input {
+      padding: 5%;
+      margin-bottom: 5%;
+    }
+    & > input:last-child {
+      font-size: 16px;
+    }
+  }
+}
