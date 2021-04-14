@@ -46,11 +46,11 @@ block content
         .watchVideo-description
             div
                 div
-                    a(href=routes.userDetail(video.creator.id))
+                    a(href=routes.yourVideo(video.creator.id))
                         img.user-avatar-img(src=video.creator.avatarUrl)
                 div
                     div
-                        a(href=routes.userDetail(video.creator.id))
+                        a(href=routes.yourVideo(video.creator.id))
                             span #{video.creator.firstName} #{video.creator.lastName}
                     div
                         span=video.description

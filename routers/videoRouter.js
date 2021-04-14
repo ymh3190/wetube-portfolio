@@ -6,6 +6,7 @@ import {
   postUploadVideo,
   videoDetail,
   watchVideo,
+  yourVideo,
 } from "../controllers/videoController";
 import { onlyPrivate, uploadVideo } from "../middlewares";
 import routes from "../routes";
@@ -16,6 +17,8 @@ videoRouter.get(routes.uploadVideo, onlyPrivate, getUploadVideo);
 videoRouter.post(routes.uploadVideo, onlyPrivate, uploadVideo, postUploadVideo);
 
 videoRouter.get(routes.watchVideo(), watchVideo);
+
+videoRouter.get(routes.yourVideo(), yourVideo);
 
 videoRouter.get(routes.videoDetail(), onlyPrivate, videoDetail);
 

@@ -1,7 +1,7 @@
 header.header
-    .header-wrapper
+    .header-wrapper#jsHeaderWrapper
         .header-column
-            a.wetube-renderer(href=routes.home)
+            a.wetube-renderer#jsWetubeRenderer(href=routes.home)
                 .wetube-logo
                     i.fab.fa-youtube
                 .wetube-path
@@ -12,18 +12,26 @@ header.header
                 button
                     i.fas.fa-search
         .header-column
-            ul.masthead
+            ul.masthead#jsMasthead
                 if user
                     //- TODO: when Hover li, show you name of list
+                    li.masthead-video
+                        i.fas.fa-video
                     li.masthead-upload
                         a(href=routes.uploadVideo)
                             i.fas.fa-upload
                     li.masthead-logout
                         a(href=routes.logout)
                             i.fas.fa-sign-out-alt
-                    li.masthead-avatar
-                        a(href=routes.userDetail(user.id))
-                            img.user-avatar-img(src=user.avatarUrl)
+                    li.masthead-avatar#jsAvatar
+                        img.user-avatar-img(src=user.avatarUrl)
+                    div#jsDropDownContent
+                        div#jsUserDetail
+                            a(href=routes.userDetail(user.id))
+                                span User Detail
+                        div#jsYourVideo
+                            a(href=routes.yourVideo(user.id))
+                                span Your Videos
                 else
                     li.masthead-signin
                         a(href=routes.signin)

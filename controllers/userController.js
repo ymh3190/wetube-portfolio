@@ -1,7 +1,6 @@
 import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
-import Video from "../models/Video";
 
 export const getSignup = (req, res) => {
   // Render signup.pug
@@ -161,9 +160,19 @@ export const userDetail = async (req, res) => {
   // Render userDetail.pug
   const {
     params: { id },
+    user: signinUser,
   } = req;
-  const videos = await Video.find({ creator: id }).populate("creator");
-  res.render("userDetail", { pageTitle: "User Detail", videos });
+  try {
+    const user = await User.findById(id);
+    if (signinUser.id === user.id) {
+      res.render("userDetail", { pageTitle: "User Detail", user });
+    } else {
+      res.redirect(routes.home);
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
 };
 
 export const editProfile = (req, res) => {

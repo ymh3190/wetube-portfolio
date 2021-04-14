@@ -7,7 +7,7 @@ mixin videoContent(video={})
             //- TODO: styling
             .video-creator-avatar
                 if video.creator
-                    a.avatar-link(href=routes.userDetail(video.creator.id))
+                    a.avatar-link(href=routes.yourVideo(video.creator.id))
                         img.avatar-img(src=video.creator.avatarUrl)
             .video-info
                 .video-info-title-link
@@ -15,11 +15,11 @@ mixin videoContent(video={})
                         h4=video.title
                 .video-info-creator
                     if video.creator
-                        a(href=routes.userDetail(video.creator.id))
+                        a(href=routes.watchVideo(video.id))
                             span #{video.creator.firstName} #{video.creator.lastName}
                 .video-info-views-createdAt
                     if video.creator
-                        a(href=routes.userDetail(video.creator.id))
+                        a(href=routes.watchVideo(video.id))
                             if video.views === 1
                                 span #{video.views} view
                             else

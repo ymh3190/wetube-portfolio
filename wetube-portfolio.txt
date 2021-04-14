@@ -1,0 +1,120 @@
+#기본 기능
+- 주소창
+- 유저: 회원가입, 로그인, 깃헙인증
+- 비디오 업로드, 삭제 등, 검색
+- 댓글 기능
+- 데이터베이스 - 유저, 파일, 홈페이지
+- 루트 보호
+- 비디오 플레이어 커스텀
+- 비디오 리코딩
+- API + AJAX
+- deploy
+
+#추가 기능
+- 썸네일: 사진 / 비디오 타입: ajax
+- 비디오상세페이지 좋아요 싫어요
+- 한 번에 여러개 업로드
+
+#개발 툴
+1. nodejs: expressjs, MVC
+2. frontend: (View) pug
+3. backend: (Model, Controller) middleware
+- app
+- routes
+- routers
+- middlewares
+
+
+#막히는 부분
+- app.js와 init.js 분리를어떻게?
+app.js에서 require와 export default 세팅하고 init.js에서 import하는데,
+에러가 난다. -> Cannot use import statement outside a module
+sol 1) 문법에러,
+nodejs에서 es6이상 문법을 사용하려면 babel이 필요함
+how to use babel in node js
+cf) https://www.robinwieruch.de/minimal-node-js-babel-setup
+
+sol 2) 예전문법사용,
+const express = require("express");
+const app = require("./app");
+module.exports = app;
+
+- middleware 
+템플릿변수: pageTitle: ""
+글로벌변수: res.locals.variableName = 
+
+- upload
+multer 미들웨어를 추가했는데, 업로드가 안된다. 왜?
+req.file과 body가 비어있다.	
+sol) router에 미들웨어 추가
+
+- 홈페이지에서 비디오 재생
+video(src=video.videoFile) 이게 왜 안되지? -> Firefox 브라우저 에러;;
+
+- Regular expression
+정규표현식을 사용해서 검색기능 추가하는 거
+해당 단어만 찾거나, 해당 단어를 포함한 것들을 찾거나
+
+- passport-local-mongoose
+인증시 패스워드 변수명을 반드시 password로 헤야된다.
+password변수명으로 인증방법을 구현했다.
+
+- 인증과정
+사용자를 깃헙페이지로 보내고
+사용자가 승인하면 깃헙 정보와 유저를 앱으로 다시 보냄
+이렇게 보낼때마다 깃헙 인증을 해야되고
+콜백함수에 깃헙 정보가 포함됨
+환경설정은 문서 참조
+
+- email이 null이다.
+MongoError: E11000 duplicate key error collection:
+WetubeDB.users index: username_1 dup key: { username: null }
+
+- 브라우저의 크기에 padding을 어떻게 다르게 적용하지?
+
+- mongoose schema 타임존 변경
+
+
+- mongoerror: e11000 duplicate key error collection: wetubedb.users index: username_1 dup key: { username: null }
+sol) db.dropDatabase();
+
+- 비디오 플레이어 커스텀하기
+tool: javascript
+play: 비디오를 어떻게 재생시킬까? -> video에 id를 부여하고 play()로 실행
+그렇다면 일시정지는? -> if else 구문으로 해결
+비디오 재생이 끝났을 때 아이콘을 원래로 되돌리려면? ended
+volume: 마우스 오버시 볼륨버튼 활성화? -> 볼륨에 이벤트추가(mouseover), 볼륨레인지 활성화는 어떻게? -> createElement
+마우스가 볼륨버튼을 벗어났을 때 원래상태로 되돌리려면?
+- 볼륨 조절: addevent(input)
+- range 색깔 변경 어떻게하지?
+- full화면 전환시 비디오는 어떻게 키우지? -> fullscreen googling
+- f키로 full하려면? -> ?
+- 비디오 전체 시간 읽기 -> loadedmetadata
+- 비디오 현재 시간 읽기 -> setInterval(function, 1000(ms단위))
+
+- wetube에 마우스를 올렸을 때 wetube home 문구를 띄우고 싶다 -> js 이벤트추가
+여기서 버그가 발생하는데, 마우스를 올렸다 놨를 반복하다보면 append한 노드가 없어지지 않는다. -> 해결책으로 async await를 써봤지만 똑같다.. cleartimeout도 마찬가지
+
+- 특정 영역 외 클릭 -> event.target으로 해결
+event.target: 이벤트 발생 위치
+event.currentTarget: 이벤트 생성 위치
+-> event.stopPropagation();
+
+
+
+
+#Ajax
+cf. https://m.blog.naver.com/king2992/221848404700
+
+Asynchronous javascript and Xml의 약자로, 자바스크립트의 라이브러리
+자바스크립트를 기반으로 클라이언트와 서버간의 비동기 통신으로 데이터를 주고 받는 방법
+
+Ajax는 왜 등장했나?
+클라이언트는 페이지의 일부분만 갱신하고 싶은데 서버로 from 데이터를 보내면
+서버는 페이지 전체를 리로드 시키게 되니, 자원낭비가 발생한다. 이는 곧 비용 증가를 의미하고
+그래서 페이지의 일부만 수정해야 하는 경우 서버 처리를 기다리지 않고 원하는 데이터만 주고
+받을 수 있는 비동기 통신
+
+
+
+

@@ -1,5 +1,5 @@
 const videoPlayer = document.getElementById("jsVideoPlayer");
-const video = videoPlayer.querySelector("video");
+const video = document.querySelector("#jsVideoPlayer video");
 const playIcon = document.getElementById("jsPlay");
 const volumeIcon = document.getElementById("jsVolume");
 const volumeRange = document.getElementById("jsVolumeRange");
@@ -24,13 +24,11 @@ const handleExitFullScreen = () => {
   screenIcon.addEventListener("click", handleFullScreen);
   screenIcon.removeEventListener("click", handleExitFullScreen);
 };
-
 const handleFullScreenKeyPress = (event) => {
   if (event.isComposing || event.keyCode === 70) {
     handleFullScreen();
   }
 };
-
 const handleFullScreen = () => {
   if (videoPlayer.requestFullscreen) {
     videoPlayer.requestFullscreen();
@@ -49,13 +47,11 @@ const handleFullScreen = () => {
 const getCurrentTime = () => {
   currentTime.innerHTML = formatDate(video.currentTime);
 };
-
 const setTotalTime = () => {
   const totalTime = formatDate(video.duration);
   totlaTime.innerHTML = totalTime;
   setInterval(getCurrentTime, 1000);
 };
-
 const formatDate = (time) => {
   const timeNumber = parseInt(time, 10);
   let hours = Math.floor(timeNumber / 3600);
@@ -89,12 +85,6 @@ const handleMute = () => {
   }
 };
 
-const handleContollersOut = () => {
-  volumeRange.removeChild(inputVolume);
-  volumeIcon.addEventListener("mouseover", handleVolume);
-  videoPlayerControllers.removeEventListener("mouseleave", handleContollersOut);
-};
-
 const handleVolumeRange = (event) => {
   const {
     target: { value },
@@ -109,6 +99,11 @@ const handleVolumeRange = (event) => {
   }
 };
 
+function handleContollersOut() {
+  volumeRange.removeChild(inputVolume);
+  volumeIcon.addEventListener("mouseover", handleVolume);
+  videoPlayerControllers.removeEventListener("mouseleave", handleContollersOut);
+}
 const handleVolume = () => {
   inputVolume = document.createElement("input");
   inputVolume.type = "range";
@@ -122,6 +117,10 @@ const handleVolume = () => {
 };
 
 const handleEnded = () => {
+  const videoId = window.location.href.split("watch/")[1];
+  fetch(`/api/${videoId}/view`, {
+    method: "post",
+  });
   video.currentTime = 0;
   playIcon.innerHTML = `<i class="fas fa-play"></i>`;
 };

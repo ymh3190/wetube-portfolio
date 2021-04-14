@@ -1,5 +1,4 @@
 extends layouts/main
-include mixins/userVideo
 
 block content
     .user-detail
@@ -9,8 +8,9 @@ block content
                     h4 Avatar
                 .avatar-img
                     .avatar-before
-                        if videos[0]
-                            img(src=videos[0].creator.avatarUrl)
+                        img(src=user.avatarUrl)
+                        //- if userId
+                        //-     img(src=videos[0].creator.avatarUrl)
                     .avatar-after
                         //- Implements add postUploadAvatar function using AJAX and API
                         //- if user.id == videos[0].creator.id
@@ -18,19 +18,8 @@ block content
                         //-         input(type="file", name="avatarFile", placeholder="Avatar", accept="imgage/*")
                         //-         button Save
             //- Implements change name, password, and delete user by AJAX
-            if user == videos[0].creator
-                .user-name
-                .user-password
-                .user-delete
-        .user-videos
-            each item in videos
-                +userVideo({
-                    videoFile:item.fileUrl,
-                    id:item.id,
-                    title:item.title,
-                    views:item.views,
-                    createdAt:item.createdAt,
-                    description:item.description,
-                    creator:item.creator
-                })
+            //- if user == videos[0].creator
+            //-     .user-name
+            //-     .user-password
+            //-     .user-delete
             

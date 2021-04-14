@@ -16,6 +16,7 @@ const WATCH_VIDEO = "/video/watch/:id";
 const UPLOAD_VIDEO = "/video/upload";
 const EDIT_VIDEO = "/video/:id/edit-video";
 const DELETE_VIDEO = "/video/:id/delete-video";
+const YOUR_VIDEO = "/video/:id/your";
 
 // Github
 const GITHUB = "/auth/github";
@@ -28,6 +29,10 @@ const FACEBOOK_CALLBACK = "/auth/facebook/callback";
 // Instagram
 const INSTAGRAM = "/auth/instagram";
 const INSTAGRAM_CALLBACK = "/auth/instagram/callback";
+
+// API
+const API = "/api";
+const REGISTER_VIEW = "/api/:id/view";
 
 const routes = {
   home: HOME,
@@ -85,12 +90,21 @@ const routes = {
       return DELETE_VIDEO;
     }
   },
+  yourVideo: (id) => {
+    if (id) {
+      return `/video/${id}/your`;
+    } else {
+      return YOUR_VIDEO;
+    }
+  },
   github: GITHUB,
   githubCallback: GITHUB_CALLBACK,
   facebook: FACEBOOK,
   facebookCallback: FACEBOOK_CALLBACK,
   instagram: INSTAGRAM,
   instagramCallback: INSTAGRAM_CALLBACK,
+  api: API,
+  registerView: REGISTER_VIEW,
 };
 
 export default routes;
