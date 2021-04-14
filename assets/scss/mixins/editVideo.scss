@@ -1,0 +1,63 @@
+.editVideo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-bottom: 1%;
+  .content-left-thumbnail {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    .overlay-link-to-wetube,
+    .overlay-link-to-wetube video {
+      width: 320px;
+    }
+    .overlay-link-to-wetube {
+      padding-right: 100px;
+      border-right: 1px solid black;
+    }
+    .video-title {
+      justify-self: center;
+      border-right: 1px solid black;
+      padding-right: 100px;
+      position: relative;
+      & > div:nth-child(2) {
+        margin-top: 50px;
+      }
+    }
+    #videoTitle {
+      position: absolute;
+      top: -5%;
+    }
+  }
+  .content-main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .content-main-header {
+      position: absolute;
+      left: -10%;
+      top: -5%;
+      background-color: white;
+    }
+    .content-main-edit {
+      display: flex;
+      justify-content: center;
+    }
+    .form-title {
+      margin: 0px 5%;
+    }
+    .input-title,
+    .input-description {
+      position: absolute;
+      top: -5%;
+      background-color: white;
+    }
+    #inputTitle,
+    #inputDescription {
+      margin-top: 50px;
+    }
+    #inputDescription {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

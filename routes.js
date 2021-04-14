@@ -11,7 +11,7 @@ const EDIT_PROFILE = "/user/:id/edit-profile";
 const CAHNGE_PASSWORD = "/user/:id/change-password";
 
 // Video routes
-const VIDEO_DETAIL = "/video/:id/detail";
+const VIDEO_DETAIL = "/video/:id";
 const WATCH_VIDEO = "/video/watch/:id";
 const UPLOAD_VIDEO = "/video/upload";
 const EDIT_VIDEO = "/video/:id/edit-video";
@@ -63,7 +63,7 @@ const routes = {
   },
   videoDetail: (id) => {
     if (id) {
-      return `/video/${id}/detail`;
+      return `/video/${id}`;
     } else {
       return VIDEO_DETAIL;
     }

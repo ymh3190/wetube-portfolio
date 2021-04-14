@@ -39,9 +39,10 @@ export const videoDetail = async (req, res) => {
     user,
   } = req;
   try {
-    const video = Video.findById(id);
-    if (user.id === toString(video.creator)) {
-      res.render("videoDetail", { pageTitle: "Video detail", video });
+    if (user.id === id) {
+      let videos = [];
+      videos = await Video.find({ creator: user.id });
+      res.render("videoDetail", { pageTitle: "Video detail", user, videos });
     } else {
       throw Error();
     }

@@ -1,10 +1,11 @@
 const body = document.getElementById("jsBody");
 const headerWrapper = document.getElementById("jsHeaderWrapper");
 const wetubeRenderer = document.getElementById("jsWetubeRenderer");
+const wetubeLogo = wetubeRenderer.querySelector(".wetube-logo");
+const wetubePath = wetubeRenderer.querySelector(".wetube-logo");
+const wetubeHome = document.getElementById("jsWetubeHome");
 const dropDownContent = document.getElementById("jsDropDownContent");
 const avatar = document.getElementById("jsAvatar");
-
-let divWetubeHome;
 
 const handleOrigin = (event) => {
   const { target } = event;
@@ -15,7 +16,6 @@ const handleOrigin = (event) => {
     body.removeEventListener("click", handleOrigin);
   }
 };
-
 const handleAvatar = (event) => {
   event.stopPropagation();
   dropDownContent.style.display = "flex";
@@ -24,27 +24,38 @@ const handleAvatar = (event) => {
   avatar.removeEventListener("click", handleAvatar);
 };
 
-function wetubeHomeOut() {
-  wetubeRenderer.removeChild(divWetubeHome);
-  wetubeRenderer.addEventListener("mouseover", handleWetubeOver);
-  wetubeRenderer.removeEventListener("mouseout", wetubeHomeOut);
+function handleWetubeOut(event) {
+  const { target } = event;
+  if (
+    target !== wetubeRenderer ||
+    target !== wetubeLogo ||
+    target !== wetubePath ||
+    target !== wetubeHome
+  ) {
+    wetubeHome.style.display = "none";
+    wetubeRenderer.addEventListener("mouseover", handleWetubeRendererOver);
+    body.removeEventListener("mouseout", handleWetubeOut);
+  }
 }
-function wetubeHome() {
-  divWetubeHome = document.createElement("div");
-  divWetubeHome.innerHTML = "WeTubeHome";
-  divWetubeHome.id = "jsWetubeHome";
-  wetubeRenderer.appendChild(divWetubeHome);
-  wetubeRenderer.addEventListener("mouseout", wetubeHomeOut);
-  wetubeRenderer.removeEventListener("mouseover", handleWetubeOver);
-}
-const handleWetubeOver = () => {
-  setTimeout(wetubeHome, 1500);
+const handleWetubeRendererOver = () => {
+  setTimeout(() => {
+    wetubeHome.style.display = "flex";
+    wetubeHome.focus();
+    body.addEventListener("mouseout", handleWetubeOut);
+    wetubeRenderer.removeEventListener("mouseover", handleWetubeRendererOver);
+  }, 1500);
 };
 
 const init = () => {
-  wetubeRenderer.addEventListener("mouseover", handleWetubeOver);
-  avatar.addEventListener("click", handleAvatar);
-  dropDownContent.style.display = "none";
+  wetubeHome.style.display = "none";
+  wetubeRenderer.addEventListener("mouseover", handleWetubeRendererOver);
+
+  if (avatar) {
+    avatar.addEventListener("click", handleAvatar);
+  }
+  if (dropDownContent) {
+    dropDownContent.style.display = "none";
+  }
 };
 
 if (headerWrapper) {

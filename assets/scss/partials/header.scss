@@ -25,9 +25,10 @@
       font-weight: 600;
     }
     #jsWetubeHome {
+      border: 1px solid rgba(0, 0, 0, 0.5);
       position: absolute;
-      right: -10px;
-      bottom: -10px;
+      z-index: 1;
+      background-color: white;
     }
   }
   .header-column:nth-child(2) {

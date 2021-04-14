@@ -6,6 +6,8 @@ header.header
                     i.fab.fa-youtube
                 .wetube-path
                     |WeTube
+                div#jsWetubeHome
+                    span WeTubeHome
         .header-column
             form.search-form(action=routes.search, method="get")
                 input(type="text", name="word", placeholder="Search")
@@ -30,8 +32,8 @@ header.header
                             a(href=routes.userDetail(user.id))
                                 span User Detail
                         div#jsYourVideo
-                            a(href=routes.yourVideo(user.id))
-                                span Your Videos
+                            a(href=routes.videoDetail(user.id))
+                                span Video Detail
                 else
                     li.masthead-signin
                         a(href=routes.signin)
