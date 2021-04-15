@@ -2,7 +2,7 @@ extends layouts/main
 include mixins/editVideo
 
 block content
-    .video-detail
+    .video-detail#jsVideoDetail
         each item in videos
             +editVideo({
                 videoFile:item.fileUrl,

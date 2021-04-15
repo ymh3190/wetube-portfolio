@@ -32,22 +32,42 @@ export const search = async (req, res) => {
   }
 };
 
-export const videoDetail = async (req, res) => {
+export const getVideoDetail = async (req, res) => {
   // Render videoDetail.pug
   const {
-    params: { id },
+    params: { userId },
     user,
   } = req;
   try {
-    if (user.id === id) {
+    if (user.id === userId) {
       let videos = [];
       videos = await Video.find({ creator: user.id });
       res.render("videoDetail", { pageTitle: "Video detail", user, videos });
+    } else {
+      console.log("asdf");
+      throw Error();
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
+};
+export const postVideoDetail = async (req, res) => {
+  const {
+    params: { userId, videoId },
+    user,
+    body: { title, description },
+  } = req;
+  try {
+    if (user.id === userId) {
+      await Video.findOneAndUpdate({ _id: videoId }, { title, description });
+      res.redirect(routes.videoDetail(userId, videoId));
     } else {
       throw Error();
     }
   } catch (error) {
     console.log(error);
+    res.status(400);
     res.redirect(routes.home);
   }
 };
@@ -90,6 +110,8 @@ export const postUploadVideo = async (req, res) => {
     res.redirect(routes.userDetail(id));
   } catch (error) {
     console.log(error);
+    res.status(400);
+    res.redirect(routes.home);
   }
 };
 

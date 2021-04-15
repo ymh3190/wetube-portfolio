@@ -3,8 +3,9 @@ import {
   deleteVideo,
   editVideo,
   getUploadVideo,
+  getVideoDetail,
   postUploadVideo,
-  videoDetail,
+  postVideoDetail,
   watchVideo,
   yourVideo,
 } from "../controllers/videoController";
@@ -20,7 +21,8 @@ videoRouter.get(routes.watchVideo(), watchVideo);
 
 videoRouter.get(routes.yourVideo(), yourVideo);
 
-videoRouter.get(routes.videoDetail(), onlyPrivate, videoDetail);
+videoRouter.get(routes.videoDetail(), onlyPrivate, getVideoDetail);
+videoRouter.post(routes.videoDetail(), onlyPrivate, postVideoDetail);
 
 videoRouter.get(routes.editVideo(), onlyPrivate, editVideo);
 videoRouter.get(routes.deleteVideo(), onlyPrivate, deleteVideo);

@@ -100,6 +100,7 @@ event.target: 이벤트 발생 위치
 event.currentTarget: 이벤트 생성 위치
 -> event.stopPropagation();
 
+- 비디오 하나만 선택하려면? -> routes에 /video/:id -> /video/:userId/:videoId로 해결
 
 
 

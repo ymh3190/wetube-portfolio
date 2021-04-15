@@ -11,7 +11,7 @@ const EDIT_PROFILE = "/user/:id/edit-profile";
 const CAHNGE_PASSWORD = "/user/:id/change-password";
 
 // Video routes
-const VIDEO_DETAIL = "/video/:id";
+const VIDEO_DETAIL = "/video/:userId/:videoId";
 const WATCH_VIDEO = "/video/watch/:id";
 const UPLOAD_VIDEO = "/video/upload";
 const EDIT_VIDEO = "/video/:id/edit-video";
@@ -61,9 +61,11 @@ const routes = {
       return CAHNGE_PASSWORD;
     }
   },
-  videoDetail: (id) => {
-    if (id) {
-      return `/video/${id}`;
+  videoDetail: (userId, videoId) => {
+    if (userId && videoId) {
+      return `/video/${userId}/${videoId}`;
+    } else if (userId && !videoId) {
+      return `/video/${userId}/:videoId`;
     } else {
       return VIDEO_DETAIL;
     }

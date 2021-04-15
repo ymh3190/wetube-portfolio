@@ -10,7 +10,7 @@ mixin editVideo(video={})
             header.content-main-header
                 h1 Video details
             .content-main-edit
-                form.form-title(action=routes.videoDetail(video.id), method="post")
+                form.form-title(action=routes.videoDetail(user.id, video.id), method="post")
                     .form-container-title
                         .input-title
                             span Title
@@ -19,7 +19,7 @@ mixin editVideo(video={})
                             input(type="text", name="title", placeholder="Title", value=video.title)
                             button
                                 span Update Title
-                form.form-description(action=routes.videoDetail(video.id), method="post")
+                form.form-description(action=routes.videoDetail(user.id, video.id), method="post")
                     .form-container-descrption
                         .input-description
                             span Description
