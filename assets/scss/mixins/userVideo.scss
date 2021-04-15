@@ -1,28 +1,25 @@
 .userVideo {
   display: flex;
-  margin-bottom: 1%;
-  .user-video-info {
-    display: flex;
-    margin-left: 5%;
-    align-items: center;
-  }
-  .wetube-link video {
-    width: 270px;
-    height: 100%;
+  flex-direction: column;
+  .userVideo-column:first-child video {
+    margin-bottom: 3%;
+    width: 285.85px;
+    height: 160.788px;
     object-fit: cover;
   }
-  .video-edit-title-form input,
-  .video-edit-description-form input {
-    margin: 5% 0px;
+  .userVideo-column:last-child {
+    margin-bottom: 10%;
+    display: flex;
+  }
+  .video-info-title-link {
+    margin-bottom: 10px;
+  }
+  .video-info-views-createdAt {
+    display: flex;
+    align-items: center;
+  }
+  .video-info-views-createdAt-start {
+    font-size: 7px;
+    margin: 0px 5px;
   }
 }
-
-// .userVideo {
-//   display: flex;
-//   .userVideo__column:first-child video {
-//     width: 240px;
-//     height: 140px;
-//     object-fit: cover;
-//     margin-bottom: 3%;
-//   }
-// }

@@ -1,28 +1,20 @@
 mixin userVideo(video={})
     .userVideo
-        .user-video
-            .video-thumbnail
-                a.wetube-link(href=routes.watchVideo(video.id)) 
-                    video(src=`/${video.videoFile}`)
-        //- Implements by using AJAX+API
-        .user-video-info
-            if user == videos[0].creator
-                form.video-edit-title-form(action=routes.userDetail(video.id), method="post")
-                    .input-title
-                        span Title
-                    input(type="text", name="title", placeholder="Title", value=video.title)
-                    //- button Update Title
-                form.video-edit-description-form(action=routes.userDetail(video.id), method="post")
-                    .input-description
-                        span Description
-                    input(type="text", name="description", placeholder="Description")
-                    //- button Update Description
-                                    
-    //- .userVideo
-    //-     .yourVideo__column
-    //-         a.thumbnail(href=routes.watchVideo(video.id))
-    //-             video(src=`/${video.videoFile}`)
-    //-     .yourVideo__column
-    //-         a.video-title-link(href=routes.watchVideo(video.id)) 
-    //-             h4=video.title
-    //-             .video-info
+        .userVideo-column
+            a.thumbnail(href=routes.watchVideo(video.id))
+                video(src=`/${video.videoFile}`)
+        .userVideo-column
+            .video-info
+                .video-info-title-link
+                    a.video-title-link(href=routes.watchVideo(video.id)) 
+                        h4=video.title
+                .video-info-views-createdAt
+                    a(href=routes.watchVideo(video.id))
+                        if video.views === 1
+                            span #{video.views} view
+                        else
+                            span #{video.views} views
+                        span.video-info-views-createdAt-start *
+                        //- TODO: Implements time (1 hour ago, 1 day ago, etc...)
+                        span.diff-time #{Math.floor((Date.now() - Date.parse(video.createdAt))/1000)}(sec) ago
+                    

@@ -3,9 +3,12 @@ mixin editVideo(video={})
         .content-left-thumbnail
             a.overlay-link-to-wetube(href=routes.watchVideo(video.id)) 
                 video(src=`/${video.videoFile}`)
-            div.video-title
+            .video-title
                 div#videoTitle Title
                 div=video.title
+            .video-description
+                div#videoDescription Description
+                div=video.description
         .content-main
             header.content-main-header
                 h1 Video details
@@ -17,6 +20,7 @@ mixin editVideo(video={})
                             span (required)
                         div#inputTitle
                             input(type="text", name="title", placeholder="Title", value=video.title)
+                            //- TODO: Modify this by using ajax+api, prevent web from refreshing
                             button
                                 span Update Title
                 form.form-description(action=routes.videoDetail(user.id, video.id), method="post")
@@ -25,5 +29,6 @@ mixin editVideo(video={})
                             span Description
                         div#inputDescription
                             textarea(type="text", name="description", placeholder="Description")=video.description
+                            //- TODO: Modify this by using ajax+api, prevent web from refreshing
                             button
                                 span Update Description

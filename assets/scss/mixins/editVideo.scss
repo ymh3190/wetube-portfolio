@@ -5,7 +5,8 @@
   margin-bottom: 1%;
   .content-left-thumbnail {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
     .overlay-link-to-wetube,
     .overlay-link-to-wetube video {
       width: 320px;
@@ -18,14 +19,27 @@
       justify-self: center;
       border-right: 1px solid black;
       padding-right: 100px;
-      position: relative;
+      & > div:nth-child(2) {
+        margin-top: 50px;
+      }
+    }
+    .video-description {
+      justify-self: center;
+      border-right: 1px solid black;
+      padding-right: 50px;
       & > div:nth-child(2) {
         margin-top: 50px;
       }
     }
     #videoTitle {
       position: absolute;
-      top: -5%;
+      top: -4%;
+      left: 57%;
+    }
+    #videoDescription {
+      position: absolute;
+      top: -4%;
+      left: 75%;
     }
   }
   .content-main {
@@ -34,7 +48,7 @@
     position: relative;
     .content-main-header {
       position: absolute;
-      left: -10%;
+      left: -4%;
       top: -5%;
       background-color: white;
     }

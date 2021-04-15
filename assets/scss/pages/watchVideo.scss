@@ -5,4 +5,30 @@
     flex-direction: column;
     align-self: center;
   }
+  .watchVideo-watch-info {
+    display: flex;
+    flex-direction: column;
+    & div {
+      display: flex;
+    }
+  }
+  .watchVideo-description {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    .watchVideo-description-info {
+      display: flex;
+      margin-bottom: 5%;
+      .user-avatar-img {
+        min-width: 48px;
+        min-height: 48px;
+        border-radius: 50%;
+        width: 20%;
+        margin-right: 20px;
+      }
+      .watchVideo-description-description {
+        margin-top: 10px;
+      }
+    }
+  }
 }

@@ -15,6 +15,7 @@ block content
                         span #{video.views} view 
                     else
                         span #{video.views} views
+                    span#star *
                     //- TODO: Move to ajax
                     if video.createdAt.getMonth() === 0
                         span Jan #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
@@ -40,19 +41,17 @@ block content
                         span Nov #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
                     else if video.createdAt.getMonth() === 11
                         span Dec #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
-                .video-menu-container
-                //- Like, unlike
 
         .watchVideo-description
-            div
-                div
+            div.watchVideo-description-info
+                div.watchVideo-description-avatar
                     a(href=routes.yourVideo(video.creator.id))
                         img.user-avatar-img(src=video.creator.avatarUrl)
-                div
-                    div
+                div.watchVideo-description-name-description
+                    div.watchVideo-description-name
                         a(href=routes.yourVideo(video.creator.id))
                             span #{video.creator.firstName} #{video.creator.lastName}
-                    div
+                    div.watchVideo-description-description
                         span=video.description
             div
                 div

@@ -44,7 +44,6 @@ export const getVideoDetail = async (req, res) => {
       videos = await Video.find({ creator: user.id });
       res.render("videoDetail", { pageTitle: "Video detail", user, videos });
     } else {
-      console.log("asdf");
       throw Error();
     }
   } catch (error) {
@@ -67,7 +66,6 @@ export const postVideoDetail = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400);
     res.redirect(routes.home);
   }
 };
@@ -146,7 +144,7 @@ export const yourVideo = async (req, res) => {
   const {
     params: { id },
   } = req;
-  const videos = await Video.find({ creator: id }).populate("creator");
+  const videos = await Video.find({ creator: id });
   res.render("yourVideo", { pageTitle: "Your videos", videos });
 };
 
