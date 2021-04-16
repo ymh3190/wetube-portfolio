@@ -43,25 +43,27 @@ block content
                         span Dec #{video.createdAt.getDate()}, #{video.createdAt.getFullYear()}
 
         .watchVideo-description
-            div.watchVideo-description-info
-                div.watchVideo-description-avatar
+            .watchVideo-description-info
+                .watchVideo-description-avatar
                     a(href=routes.yourVideo(video.creator.id))
                         img.user-avatar-img(src=video.creator.avatarUrl)
-                div.watchVideo-description-name-description
-                    div.watchVideo-description-name
+                .watchVideo-description-name-description
+                    .watchVideo-description-name
                         a(href=routes.yourVideo(video.creator.id))
                             span #{video.creator.firstName} #{video.creator.lastName}
-                    div.watchVideo-description-description
+                    .watchVideo-description-description
                         span=video.description
-            div.watchVideo-comments
-                div.watchVideo-comments-length
+            .watchVideo-comments
+                .watchVideo-comments-length
                     div
                         if video.comments.length === 1
-                            span #{video.comments.length} comment
+                            span#jsCommentLength #{video.comments.length} 
+                            span#comment-s comment
                         else
-                            span #{video.comments.length} comments
-                div.watchVideo-comments-info
-                    div.watchVideo-comments-add
+                            span#jsCommentLength #{video.comments.length} 
+                            span#comment-s comments
+                .watchVideo-comments-info
+                    .watchVideo-comments-add
                         div
                             if user
                                 img.avatar-img(src=user.avatarUrl)
@@ -69,16 +71,16 @@ block content
                                 img.avatar-img(src="")
                         div
                             if user
-                                form.watchVideo-comments-add-form(action=routes.watchVideo(video.id), method="post")
+                                form.watchVideo-comments-add-form#jsAddCommentForm
                                     input(type="text", name="comment", placeholder="Add a public comment...")
-                                    button COMMENT
+                                    button#jsAddCommentBtn COMMENT
                             else
                                 form.watchVideo-comments-add-form(action=routes.signin, method="get")
                                     input(type="text", name="comment", placeholder="Add a public comment...")
                                     button COMMENT
-                    div.watchVideo-comments-display
+                    ul.watchVideo-comments-display#jsCommentUL
                         each comment in video.comments
-                            div.watchVideo-comment-info
+                            li.watchVideo-comment-info
                                 a(href=routes.yourVideo(comment.creatorId)) 
                                     img.avatar-img(src=comment.creatorAvatar)
                                 div

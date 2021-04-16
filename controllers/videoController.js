@@ -2,7 +2,6 @@ import routes from "../routes";
 import Comment from "../models/Comment";
 import User from "../models/User";
 import Video from "../models/Video";
-import { tryCatchVideo } from "../middlewares";
 
 export const home = async (req, res) => {
   // Render home.pug
@@ -55,20 +54,15 @@ export const getVideoDetail = async (req, res) => {
 export const postVideoDetail = async (req, res) => {
   const {
     params: { userId, videoId },
-    user,
     body: { title, description },
   } = req;
-  try {
-    if (user.id === userId) {
-      await Video.findOneAndUpdate({ _id: videoId }, { title, description });
-      res.redirect(routes.videoDetail(userId, videoId));
-    } else {
-      throw Error();
-    }
-  } catch (error) {
-    console.log(error);
-    res.redirect(routes.home);
+  if (title) {
+    await Video.findOneAndUpdate({ _id: videoId }, { title });
   }
+  if (description) {
+    await Video.findOneAndUpdate({ _id: videoId }, { description });
+  }
+  res.redirect(routes.videoDetail(userId, videoId));
 };
 
 export const getWatchVideo = async (req, res) => {
@@ -84,33 +78,6 @@ export const getWatchVideo = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);
-  }
-};
-export const postWatchVideo = async (req, res) => {
-  // Render watchVideo.pug
-  const {
-    params: { id },
-    user,
-    body: { comment },
-  } = req;
-  try {
-    if (user.id) {
-      const video = await Video.findById(id)
-        .populate("creator")
-        .populate("comments");
-      const newComment = await Comment.create({
-        content: comment,
-        creatorId: user.id,
-        creatorAvatar: user.avatarUrl,
-      });
-      video.comments.push(newComment.id);
-      video.save();
-      res.render("watchVideo", { pageTitle: "Watch video", video });
-    } else {
-      res.redirect(routes.signin);
-    }
-  } catch (error) {
-    console.log(error);
   }
 };
 
@@ -143,27 +110,16 @@ export const postUploadVideo = async (req, res) => {
   }
 };
 
-export const editVideo = async (req, res) => {
-  // Render editVideo.pug
-};
-
 export const deleteVideo = async (req, res) => {
   // Delete video
-  // TODO: implements deleting video
   const {
     params: { id },
     user,
   } = req;
   try {
     const video = await Video.findById(id);
-    const videoCreator = video.creator.toString();
-    if (user.id === videoCreator) {
-      await Video.findOneAndDelete({ _id: video.id });
-      res.redirect(routes.videoDetail(video.creator));
-    } else {
-      res.status(400);
-      return Error();
-    }
+    await Video.findOneAndDelete({ _id: video.id });
+    res.redirect(routes.videoDetail(video.creator));
   } catch (error) {
     console.log(error);
     res.redirect(routes.videoDetail(user.id));
@@ -190,6 +146,29 @@ export const postRegisterView = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postAddComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { comment },
+    user,
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    const newComment = await Comment.create({
+      content: comment,
+      creatorId: user.id,
+      creatorAvatar: user.avatarUrl,
+    });
+    video.comments.push(newComment);
+    video.save();
+    res.status(200);
+  } catch (error) {
+    console.log(error);
   } finally {
     res.end();
   }

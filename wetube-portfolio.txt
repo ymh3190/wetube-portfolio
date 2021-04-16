@@ -105,6 +105,18 @@ event.currentTarget: 이벤트 생성 위치
 - 프로필사진 변경시 경로에 문제가 생김 ->
 절대경로로하면 깃헙 등의 이미지를 상대경로로 못받고, 상대경로로하면 업데이트한 경로를 절대경로로 못받음 -> AWS S3 데이터베이스에 아바타 및 비디오를 저장하고 그 url을 상대참조해서 해결할 예정
 
+- 댓글 추가시 리프레쉬 되는건 어떻게? -> 여기서 필요한 개념이 API 와 AJAX
+1. api를 위한 route 생성
+2. apiRouter에 추가
+3. 이벤트에 id를 부여하고 js에서 dom을 할당한다.
+4. axios 혹은 fetch를 통해 url에 접속, 서버와 통신한다.
+5. 통신 결과를 createElement로 view에 반영한다.
+
+- 댓글 추가시 작성자의 프로필사진도 함께 넣고싶은데 어떻게 할까? -> 구글에 window.document.body로 해결
+- 프로필 사진의 크기를 줄이려면? -> DOM style로 width, height를 부여
+- 작성자 이미지 클릭시 유저가 만든 비디오페이지로 이동 -> window로 해결
+
+
 
 #Ajax
 cf. https://m.blog.naver.com/king2992/221848404700

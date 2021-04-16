@@ -22,6 +22,9 @@
     flex-direction: column;
     .watchVideo-comments-length {
       margin-bottom: 3%;
+      #comment-s {
+        margin-left: 0.1%;
+      }
     }
     .watchVideo-comments-info {
       display: flex;
@@ -47,19 +50,15 @@
           }
         }
       }
-      .watchVideo-comments-display {
-        display: grid;
-        grid-template-rows: repeat(auto, 1fr);
-        .watchVideo-comment-info {
-          display: flex;
-          align-items: center;
-          margin-top: 20px;
-        }
-        img {
-          width: 48px;
-          height: 48px;
-          margin-right: 20px;
-        }
+    }
+    .watchVideo-comment-info {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      img {
+        width: 48px;
+        height: 48px;
+        margin-right: 20px;
       }
     }
   }

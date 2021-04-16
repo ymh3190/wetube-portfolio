@@ -7,14 +7,11 @@ const LOGOUT = "/logout";
 
 // User routes
 const USER_DETAIL = "/user/:id";
-const EDIT_PROFILE = "/user/:id/edit-profile";
-const CAHNGE_PASSWORD = "/user/:id/change-password";
 
 // Video routes
 const VIDEO_DETAIL = "/video/:userId/:videoId";
 const WATCH_VIDEO = "/video/watch/:id";
 const UPLOAD_VIDEO = "/video/upload";
-const EDIT_VIDEO = "/video/:id/edit-video";
 const DELETE_VIDEO = "/video/:id/delete-video";
 const YOUR_VIDEO = "/video/:id/your";
 
@@ -33,6 +30,7 @@ const INSTAGRAM_CALLBACK = "/auth/instagram/callback";
 // API
 const API = "/api";
 const REGISTER_VIEW = "/api/:id/view";
+const ADD_COMMENT = "/api/:id/comment";
 
 const routes = {
   home: HOME,
@@ -45,20 +43,6 @@ const routes = {
       return `/user/${id}`;
     } else {
       return USER_DETAIL;
-    }
-  },
-  editProfile: (id) => {
-    if (id) {
-      return `/user/${id}/edit-profile`;
-    } else {
-      return EDIT_PROFILE;
-    }
-  },
-  changePassword: (id) => {
-    if (id) {
-      return `/user/${id}/change-password`;
-    } else {
-      return CAHNGE_PASSWORD;
     }
   },
   videoDetail: (userId, videoId) => {
@@ -78,13 +62,6 @@ const routes = {
     }
   },
   uploadVideo: UPLOAD_VIDEO,
-  editVideo: (id) => {
-    if (id) {
-      return `/video/${id}/edit-video`;
-    } else {
-      return EDIT_VIDEO;
-    }
-  },
   deleteVideo: (id) => {
     if (id) {
       return `/video/${id}/delete-video`;
@@ -107,6 +84,7 @@ const routes = {
   instagramCallback: INSTAGRAM_CALLBACK,
   api: API,
   registerView: REGISTER_VIEW,
+  addComment: ADD_COMMENT,
 };
 
 export default routes;

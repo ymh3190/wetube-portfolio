@@ -202,13 +202,3 @@ export const postUserDetail = async (req, res) => {
     res.redirect(routes.home);
   }
 };
-
-export const editProfile = (req, res) => {
-  // Render editProfile.pug
-  res.render("editProfile", { pageTitle: "Edit Profile" });
-};
-
-export const changePassword = (req, res) => {
-  // Render changePassword.pug
-  res.render("changePassword", { pageTitle: "Change Password" });
-};
