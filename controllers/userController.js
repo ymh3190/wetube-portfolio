@@ -156,7 +156,7 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const userDetail = async (req, res) => {
+export const getUserDetail = async (req, res) => {
   // Render userDetail.pug
   const {
     params: { id },
@@ -167,7 +167,35 @@ export const userDetail = async (req, res) => {
     if (signinUser.id === user.id) {
       res.render("userDetail", { pageTitle: "User Detail", user });
     } else {
-      res.redirect(routes.home);
+      res.status(400);
+    }
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
+};
+export const postUserDetail = async (req, res) => {
+  const {
+    params: { id },
+    file,
+    body: { oldPassword, newPassword, confirmPassword },
+    user,
+  } = req;
+  console.log("check");
+  try {
+    if (newPassword === confirmPassword) {
+      await user.changePassword(oldPassword, newPassword);
+      console.log("pw");
+      res.redirect(routes.userDetail(id));
+    } else {
+      res.redirect(routes.userDetail(id));
+    }
+    if (file) {
+      await User.findByIdAndUpdate(id, {
+        avatarUrl: file.path,
+      });
+      console.log("file");
+      res.redirect(routes.userDetail(id));
     }
   } catch (error) {
     console.log(error);

@@ -132,8 +132,10 @@ export const postUploadVideo = async (req, res) => {
       description,
       creator: id,
     });
-    await User.findOneAndUpdate({ id, videos: newVideo });
-    res.redirect(routes.userDetail(id));
+    const user = await User.findById(id).populate("videos");
+    user.videos.push(newVideo);
+    user.save();
+    res.redirect(routes.videoDetail(id));
   } catch (error) {
     console.log(error);
     res.status(400);
