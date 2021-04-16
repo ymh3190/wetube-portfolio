@@ -53,27 +53,34 @@ block content
                             span #{video.creator.firstName} #{video.creator.lastName}
                     div.watchVideo-description-description
                         span=video.description
-            div
-                div
+            div.watchVideo-comments
+                div.watchVideo-comments-length
                     div
-                        if video.comments === 1
+                        if video.comments.length === 1
                             span #{video.comments.length} comment
                         else
                             span #{video.comments.length} comments
-                div
-                    //- Add comment
-                    div
+                div.watchVideo-comments-info
+                    div.watchVideo-comments-add
                         div
-                            img.avatar-img(src="")
-                        div
-                            form(action=routes.watchVideo(video.id), method="post")
-                                input(type="text", name="comment", placeholder="Add a public comment...")
-                                button COMMENT
-                    //- Implements showing us comments
-                    div
-                        each comment in video.comments
-                            div
+                            if user
+                                img.avatar-img(src=user.avatarUrl)
+                            else
                                 img.avatar-img(src="")
-                            div
-                                span=comment.id
+                        div
+                            if user
+                                form.watchVideo-comments-add-form(action=routes.watchVideo(video.id), method="post")
+                                    input(type="text", name="comment", placeholder="Add a public comment...")
+                                    button COMMENT
+                            else
+                                form.watchVideo-comments-add-form(action=routes.signin, method="get")
+                                    input(type="text", name="comment", placeholder="Add a public comment...")
+                                    button COMMENT
+                    div.watchVideo-comments-display
+                        each comment in video.comments
+                            div.watchVideo-comment-info
+                                a(href=routes.yourVideo(comment.creatorId)) 
+                                    img.avatar-img(src=comment.creatorAvatar)
+                                div
+                                    span=comment.content
 

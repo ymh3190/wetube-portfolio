@@ -1,4 +1,5 @@
 import routes from "../routes";
+import Comment from "../models/Comment";
 import User from "../models/User";
 import Video from "../models/Video";
 import { tryCatchVideo } from "../middlewares";
@@ -70,7 +71,7 @@ export const postVideoDetail = async (req, res) => {
   }
 };
 
-export const watchVideo = async (req, res) => {
+export const getWatchVideo = async (req, res) => {
   // Render watchVideo.pug
   const {
     params: { id },
@@ -83,6 +84,33 @@ export const watchVideo = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.redirect(routes.home);
+  }
+};
+export const postWatchVideo = async (req, res) => {
+  // Render watchVideo.pug
+  const {
+    params: { id },
+    user,
+    body: { comment },
+  } = req;
+  try {
+    if (user.id) {
+      const video = await Video.findById(id)
+        .populate("creator")
+        .populate("comments");
+      const newComment = await Comment.create({
+        content: comment,
+        creatorId: user.id,
+        creatorAvatar: user.avatarUrl,
+      });
+      video.comments.push(newComment.id);
+      video.save();
+      res.render("watchVideo", { pageTitle: "Watch video", video });
+    } else {
+      res.redirect(routes.signin);
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -115,11 +143,6 @@ export const postUploadVideo = async (req, res) => {
 
 export const editVideo = async (req, res) => {
   // Render editVideo.pug
-  const {
-    params: { id },
-  } = req;
-  const video = await tryCatchVideo(id);
-  res.render("editVideo", { pageTitle: "editVideo", video });
 };
 
 export const deleteVideo = async (req, res) => {
@@ -130,14 +153,19 @@ export const deleteVideo = async (req, res) => {
     user,
   } = req;
   try {
-    const video = Video.findById(id);
-    if (user.id === toString(video.creator)) {
-      await Video.findOneAndRemove({ id });
+    const video = await Video.findById(id);
+    const videoCreator = video.creator.toString();
+    if (user.id === videoCreator) {
+      await Video.findOneAndDelete({ _id: video.id });
+      res.redirect(routes.videoDetail(video.creator));
+    } else {
+      res.status(400);
+      return Error();
     }
   } catch (error) {
     console.log(error);
+    res.redirect(routes.videoDetail(user.id));
   }
-  res.redirect(routes.home);
 };
 
 export const yourVideo = async (req, res) => {

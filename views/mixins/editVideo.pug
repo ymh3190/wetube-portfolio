@@ -32,3 +32,6 @@ mixin editVideo(video={})
                             //- TODO: Modify this by using ajax+api, prevent web from refreshing
                             button
                                 span Update Description
+                .delete-video
+                    a(href=routes.deleteVideo(video.id))
+                        button Delete Video
