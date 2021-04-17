@@ -159,14 +159,38 @@ export const postAddComment = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    const newComment = await Comment.create({
-      content: comment,
-      creatorId: user.id,
-      creatorAvatar: user.avatarUrl,
-    });
-    video.comments.push(newComment);
-    video.save();
-    res.status(200);
+    if (user) {
+      const newComment = await Comment.create({
+        content: comment,
+        creatorId: user.id,
+        creatorAvatar: user.avatarUrl,
+      });
+      video.comments.push(newComment);
+      video.save();
+      res.status(200);
+    } else {
+      res.status(400);
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    res.end();
+  }
+};
+
+export const postDeleteComment = async (req, res) => {
+  const {
+    params: { id },
+    user,
+  } = req;
+  try {
+    const comment = await Comment.findById(id);
+    if (user.id === comment.creatorId) {
+      comment.delete();
+      res.status(200);
+    } else {
+      res.status(400);
+    }
   } catch (error) {
     console.log(error);
   } finally {

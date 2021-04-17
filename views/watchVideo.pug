@@ -79,10 +79,13 @@ block content
                                     input(type="text", name="comment", placeholder="Add a public comment...")
                                     button COMMENT
                     ul.watchVideo-comments-display#jsCommentUL
-                        each comment in video.comments
+                        each comment in video.comments.reverse()
                             li.watchVideo-comment-info
                                 a(href=routes.yourVideo(comment.creatorId)) 
                                     img.avatar-img(src=comment.creatorAvatar)
                                 div
                                     span=comment.content
+                                    if user.id === comment.creatorId
+                                        span#jsCommentId=comment.id
+                                        button X
 

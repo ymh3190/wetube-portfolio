@@ -41,11 +41,11 @@
         & div:last-child {
           width: 100%;
           input {
-            width: 80%;
+            width: 90%;
             padding: 10px;
           }
           button {
-            width: 10%;
+            width: 8%;
             padding: 10px;
           }
         }
@@ -59,6 +59,14 @@
         width: 48px;
         height: 48px;
         margin-right: 20px;
+      }
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 95%;
+        #jsCommentId {
+          display: none;
+        }
       }
     }
   }

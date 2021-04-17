@@ -31,6 +31,9 @@ const INSTAGRAM_CALLBACK = "/auth/instagram/callback";
 const API = "/api";
 const REGISTER_VIEW = "/api/:id/view";
 const ADD_COMMENT = "/api/:id/comment";
+const DELETE_COMMENT = "/api/:id/delete";
+// const DELETE_COMMENT = "/api/:videoId/delete";
+// const DELETE_COMMENT = "/api/:videoId/:commentId/delete";
 
 const routes = {
   home: HOME,
@@ -85,6 +88,7 @@ const routes = {
   api: API,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
+  deleteComment: DELETE_COMMENT,
 };
 
 export default routes;
