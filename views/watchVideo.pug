@@ -80,12 +80,11 @@ block content
                                     button COMMENT
                     ul.watchVideo-comments-display#jsCommentUL
                         each comment in video.comments.reverse()
-                            li.watchVideo-comment-info
+                            li.watchVideo-comment-info#jsCommentLI
                                 a(href=routes.yourVideo(comment.creatorId)) 
                                     img.avatar-img(src=comment.creatorAvatar)
                                 div
                                     span=comment.content
                                     if user.id === comment.creatorId
-                                        span#jsCommentId=comment.id
-                                        button X
-
+                                        button#jsCommentId(comment-id=`${comment.id}`) X
+                                        

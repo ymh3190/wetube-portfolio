@@ -1,17 +1,16 @@
 import axios from "axios";
 
 const commentUL = document.getElementById("jsCommentUL");
-const commentLists = document.querySelectorAll("#jsCommentUL li");
-const deleteCommentBtns = document.querySelectorAll(
-  ".watchVideo-comment-info div button"
-);
+const deleteCommentBtns = document.querySelectorAll("#jsCommentId");
 const commentS = document.getElementById("comment-s");
 const commentLength = document.getElementById("jsCommentLength");
 
 const handleButton = async (event) => {
   event.preventDefault();
 
-  const commentId = window.document.getElementById("jsCommentId").innerHTML;
+  const commentId = window.document
+    .getElementById("jsCommentId")
+    .getAttribute("comment-id");
   const li = event.target.parentNode.parentNode;
 
   commentUL.removeChild(li);

@@ -4,7 +4,6 @@ const addCommentForm = document.getElementById("jsAddCommentForm");
 const addCommentBtn = document.getElementById("jsAddCommentBtn");
 const commentUL = document.getElementById("jsCommentUL");
 const commentLength = document.getElementById("jsCommentLength");
-
 const commentS = document.getElementById("comment-s");
 
 function increaseCommentLength() {
@@ -14,7 +13,9 @@ function increaseCommentLength() {
 async function handleDeleteComment(event) {
   event.preventDefault();
 
-  const commentId = window.document.getElementById("jsCommentId").innerHTML;
+  const commentId = window.document
+    .getElementById("jsCommentId")
+    .getAttribute("comment-id");
 
   const li = event.target.parentNode.parentNode;
   commentUL.removeChild(li);
@@ -22,7 +23,6 @@ async function handleDeleteComment(event) {
   const response = await axios({
     url: `/api/${commentId}/delete`,
     method: "post",
-    data: {},
   });
   if (response.status === 200) {
     commentLength.innerHTML = parseInt(commentLength.innerHTML, 10) - 1;
@@ -53,13 +53,14 @@ function addComment(comment, creatorAvatar, creatorId) {
   divComment.style.width = "95%";
   const spanComment = document.createElement("span");
   spanComment.innerHTML = comment;
+
   const deleteCommentBtn = document.createElement("button");
   deleteCommentBtn.innerHTML = "X";
 
   linkCreator.appendChild(imgAvatar);
   listComment.appendChild(linkCreator);
 
-  deleteCommentBtn.addEventListener("click", handleDeleteComment);
+  // deleteCommentBtn.addEventListener("click", handleDeleteComment);
 
   divComment.appendChild(spanComment);
   divComment.appendChild(deleteCommentBtn);
