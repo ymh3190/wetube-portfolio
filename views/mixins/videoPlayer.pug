@@ -1,6 +1,6 @@
 mixin videoPlayer(video={})
     .videoPlayer#jsVideoPlayer
-        video(src=`/${video.fileUrl}`)
+        video(src=video.fileUrl)
         .videoPlayer-controllers#jsVideoPlayerControllers
             .videoPlayer-controllers-left
                 .videoPlayer-resume

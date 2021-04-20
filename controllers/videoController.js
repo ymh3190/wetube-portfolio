@@ -89,12 +89,12 @@ export const postUploadVideo = async (req, res) => {
   // Upload video and redirect videoDetail
   const {
     body: { title, description },
-    file: { path },
+    file: { location },
     user: { id },
   } = req;
   try {
     const newVideo = await Video.create({
-      fileUrl: path,
+      fileUrl: location,
       title,
       description,
       creator: id,

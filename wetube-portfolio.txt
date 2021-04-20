@@ -116,6 +116,12 @@ event.currentTarget: 이벤트 생성 위치
 - 프로필 사진의 크기를 줄이려면? -> DOM style로 width, height를 부여
 - 작성자 이미지 클릭시 유저가 만든 비디오페이지로 이동 -> window로 해결
 
+- AWS S3를 사용하기 위한 세팅
+1. npm i multer-s3, aws-s3 
+2. middlewares에 multer로 구현된 부분 multer-s3로 변경
+3. 비디오나 아바타 업로드시 file 경로 수정. 프로젝트 폴더 내에 저장하면 path가 되고, 외부애 저장한다면 location이 된다.
+
+
 
 
 #Ajax

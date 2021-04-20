@@ -2,7 +2,7 @@ mixin videoContent(video={})
     .videoContent
         .videoContent__column
             a.thumbnail(href=routes.watchVideo(video.id))
-                video(src=`/${video.videoFile}`)
+                video(src=video.videoFile)
         .videoContent__column
             //- TODO: styling
             .video-creator-avatar

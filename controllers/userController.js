@@ -177,22 +177,21 @@ export const getUserDetail = async (req, res) => {
 export const postUserDetail = async (req, res) => {
   const {
     params: { id },
-    file,
+    file: { location },
     body: { oldPassword, newPassword, confirmPassword },
     user,
   } = req;
-  console.log("check");
   try {
-    if (newPassword === confirmPassword) {
+    if (newPassword === confirmPassword && newPassword) {
       await user.changePassword(oldPassword, newPassword);
       console.log("pw");
       res.redirect(routes.userDetail(id));
     } else {
       res.redirect(routes.userDetail(id));
     }
-    if (file) {
+    if (location) {
       await User.findByIdAndUpdate(id, {
-        avatarUrl: file.path,
+        avatarUrl: location,
       });
       console.log("file");
       res.redirect(routes.userDetail(id));
