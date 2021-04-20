@@ -11,8 +11,8 @@ const handleButton = async (event) => {
   const commentId = window.document
     .getElementById("jsCommentId")
     .getAttribute("comment-id");
-  const li = event.target.parentNode.parentNode;
 
+  const li = event.target.parentNode.parentNode;
   commentUL.removeChild(li);
 
   const response = await axios({

@@ -60,7 +60,7 @@ function addComment(comment, creatorAvatar, creatorId) {
   linkCreator.appendChild(imgAvatar);
   listComment.appendChild(linkCreator);
 
-  // deleteCommentBtn.addEventListener("click", handleDeleteComment);
+  deleteCommentBtn.addEventListener("click", handleDeleteComment);
 
   divComment.appendChild(spanComment);
   divComment.appendChild(deleteCommentBtn);
