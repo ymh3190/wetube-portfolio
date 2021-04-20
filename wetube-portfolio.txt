@@ -121,6 +121,9 @@ event.currentTarget: 이벤트 생성 위치
 2. middlewares에 multer로 구현된 부분 multer-s3로 변경
 3. 비디오나 아바타 업로드시 file 경로 수정. 프로젝트 폴더 내에 저장하면 path가 되고, 외부애 저장한다면 location이 된다.
 
+- DB를 클라우드로 옮기기
+
+
 
 
 

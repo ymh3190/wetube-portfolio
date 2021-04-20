@@ -2,7 +2,7 @@ mixin editVideo(video={})
     .editVideo
         .content-left-thumbnail
             a.overlay-link-to-wetube(href=routes.watchVideo(video.id)) 
-                video(src=`/${video.videoFile}`)
+                video(src=video.videoFile)
             .video-title
                 div#videoTitle Title
                 div=video.title
