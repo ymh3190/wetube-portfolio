@@ -94,6 +94,7 @@ export const facebookSigninCallback = async (_, __, profile, cb) => {
   const {
     _json: { id, email, last_name: lastName, first_name: firstName, picture },
   } = profile;
+  console.log(_);
   try {
     const user = await User.findOne({ email });
     if (user) {
@@ -106,38 +107,6 @@ export const facebookSigninCallback = async (_, __, profile, cb) => {
     } else {
       const newUser = await User.create({
         facebookId: id,
-        email,
-        firstName,
-        lastName,
-        avatarUrl: picture.data.url,
-      });
-      return cb(null, newUser);
-    }
-  } catch (error) {
-    return cb(error);
-  }
-};
-
-export const instagramSignin = passport.authenticate("instagram");
-export const postInstagramSignin = (req, res) => {
-  res.redirect(routes.home);
-};
-export const instagramSigninCallback = async (_, __, profile, cb) => {
-  const {
-    _json: { id, email, last_name: lastName, first_name: firstName, picture },
-  } = profile;
-  try {
-    const user = await User.findOne({ email });
-    if (user) {
-      user.instagramId = id;
-      user.firstName = firstName;
-      user.lastName = lastName;
-      user.avatarUrl = picture.data.url;
-      user.save();
-      return cb(null, user);
-    } else {
-      const newUser = await User.create({
-        instagramId: id,
         email,
         firstName,
         lastName,
@@ -184,7 +153,6 @@ export const postUserDetail = async (req, res) => {
   try {
     if (newPassword === confirmPassword && newPassword) {
       await user.changePassword(oldPassword, newPassword);
-      console.log("pw");
       res.redirect(routes.userDetail(id));
     } else {
       res.redirect(routes.userDetail(id));
@@ -193,7 +161,6 @@ export const postUserDetail = async (req, res) => {
       await User.findByIdAndUpdate(id, {
         avatarUrl: location,
       });
-      console.log("file");
       res.redirect(routes.userDetail(id));
     }
   } catch (error) {

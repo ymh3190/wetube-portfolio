@@ -123,7 +123,11 @@ event.currentTarget: 이벤트 생성 위치
 
 - DB를 클라우드로 옮기기
 
+- production buildd 에러
+if (!options.clientID) { throw new TypeError('OAuth2Strategy requires a clientID option'); }
+                           ^
 
+TypeError: OAuth2Strategy requires a clientID option
 
 
 

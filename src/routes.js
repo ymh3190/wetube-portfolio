@@ -23,10 +23,6 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const FACEBOOK = "/auth/facebook";
 const FACEBOOK_CALLBACK = "/auth/facebook/callback";
 
-// Instagram
-const INSTAGRAM = "/auth/instagram";
-const INSTAGRAM_CALLBACK = "/auth/instagram/callback";
-
 // API
 const API = "/api";
 const REGISTER_VIEW = "/api/:id/view";
@@ -81,8 +77,6 @@ const routes = {
   githubCallback: GITHUB_CALLBACK,
   facebook: FACEBOOK,
   facebookCallback: FACEBOOK_CALLBACK,
-  instagram: INSTAGRAM,
-  instagramCallback: INSTAGRAM_CALLBACK,
   api: API,
   registerView: REGISTER_VIEW,
   addComment: ADD_COMMENT,
